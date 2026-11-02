@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q14. Enter an array from user and print all possible combinations of the elements</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+int main()
+{
+    int arr[3],i,j;
+    printf(&quot;Enter any three numbers: &quot;);
+    for(i=0;i&lt;3;i++)
+    {
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+    printf(&quot;All possible combinations are:\n&quot;);
+    for(i=0;i&lt;3;i++)
+    {
+        for(j=0;j&lt;3;j++)
+        {
+            if(i!=j)
+            {
+                printf(&quot;%d %d\n&quot;,arr[i],arr[j]);
+            }
+        }
+    }
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter any three numbers: 10 11 13
+All possible combinations are:
+10 11
+10 13
+11 10
+11 13
+13 10
+13 11
+</pre></h3>
+  <a href="../arrays.html">Back to Topic</a>
+</body>
+</html>

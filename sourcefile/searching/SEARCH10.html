@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Searching Algorithms</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q10. Calculate the best and worst complexity of the binary searching algorithm with exact time taken by the algorithm on integer array.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a[100], n, i, value;
+    int low, high, mid, count = 0;
+
+    printf(&quot;Enter size of array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter elements in ascending order:\n&quot;);
+    for(i = 0; i &lt; n; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;a[i]);
+    }
+
+    printf(&quot;Enter value to search: &quot;);
+    scanf(&quot;%d&quot;, &amp;value);
+
+    low = 0;
+    high = n - 1;
+
+    while(low &lt;= high)
+    {
+        mid = (low + high) / 2;
+        count++;
+
+        if(a[mid] == value)
+        {
+            printf(&quot;Value found at position %d\n&quot;, mid + 1);
+            break;
+        }
+        else if(value &gt; a[mid])
+        {
+            low = mid + 1;
+        }
+        else
+        {
+            high = mid - 1;
+        }
+    }
+
+    if(low &gt; high)
+        printf(&quot;Value not found\n&quot;);
+
+    printf(&quot;Number of comparisons: %d\n&quot;, count);
+
+    if(count == 1)
+        printf(&quot;Best case complexity: O(1)\n&quot;);
+    else
+        printf(&quot;Worst case complexity: O(log n)\n&quot;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>-
+Enter size of array: 5
+Enter elements in ascending order:
+10 20 30 40 50
+Enter value to search: 30
+Value found at position 3
+Number of comparisons: 1
+Best case complexity: O(1)
+</pre></h3>
+  <a href="../searching.html">Back to Topic</a>
+</body>
+</html>

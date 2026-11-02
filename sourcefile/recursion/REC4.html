@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recursion</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q4. Convert a number into binary using recursion</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+void binary(int n)
+{
+    if (n &gt; 1)
+        binary(n / 2);
+
+    printf(&quot;%d&quot;, n % 2);
+}
+
+int main()
+{
+    int n;
+
+    printf(&quot;Enter a number: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Binary number: &quot;);
+    binary(n);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>enter a number : 10
+binary number : 1010
+</pre></h3>
+  <a href="../recursion.html">Back to Topic</a>
+</body>
+</html>

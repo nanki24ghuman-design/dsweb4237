@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q13. Enter an array from user and count the duplicate values</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+int main()
+{
+    int arr[5],i,j,count=0;
+    printf(&quot;Enter any five numbers: &quot;);
+    for(i=0;i&lt;5;i++)
+    {
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+    for(i=0;i&lt;5;i++)
+    {
+        for(j=i+1;j&lt;5;j++)
+        {
+            if(arr[i]==arr[j])
+            {
+                count++;
+                break;
+            }
+        }
+    }
+    printf(&quot;Total duplicate values = %d&quot;,count);
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter any five numbers: 6
+5
+4
+3
+4
+Total duplicate values = 1
+</pre></h3>
+  <a href="../arrays.html">Back to Topic</a>
+</body>
+</html>

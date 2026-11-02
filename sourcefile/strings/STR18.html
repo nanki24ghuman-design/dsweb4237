@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q18. Enter the string from user and convert it into an integer value</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[100];
+    int i = 0, num = 0, sign = 1;
+
+    printf(&quot;Enter a number: &quot;);
+    scanf(&quot;%99s&quot;, str);
+
+    if(str[0] == &#x27;-&#x27;)
+    {
+        sign = -1;
+        i = 1;
+    }
+
+    for(; str[i] != &#x27;\0&#x27;; i++)
+        num = num * 10 + (str[i] - &#x27;0&#x27;);
+
+    num = num * sign;
+
+    printf(&quot;Integer value = %d&quot;, num);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a number: 127
+Integer value = 127
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

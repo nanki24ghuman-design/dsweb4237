@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trees</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q5. Print left view of binary tree</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+struct node{
+    int data;
+    struct node*left,*right;
+};
+struct node*create(int data){
+    struct node*newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode-&gt;data=data;
+    newnode-&gt;left=NULL;
+    newnode-&gt;right=NULL;
+    return newnode;
+}
+void leftview(struct node*root){
+    struct node*queue[100];
+    int front=0,rear=0;
+    int count,i;
+    if(root==NULL)
+    return;
+    queue[rear++]=root;
+    while(front&lt;rear){
+       count=rear-front;
+       for(i=0;i&lt;count;i++){
+        struct node*temp=queue[front++];
+        if(i==0)
+        printf(&quot;%d&quot;,temp-&gt;data);
+        if(temp-&gt;left!= NULL)
+        queue[rear++]=temp-&gt;left;
+        if(temp-&gt;right!=NULL)
+        queue[rear++]=temp-&gt;right;
+       }
+    }
+}
+int main(){
+    struct node*root;
+    root=create(1);
+    root-&gt;left=create(2);
+    root-&gt;right=create(3);
+    root-&gt;left-&gt;left=create(4);
+    root-&gt;left-&gt;right=create(5);
+    root-&gt;right-&gt;left=create(6);
+    root-&gt;right-&gt;right=create(7);
+    printf(&quot;left view:&quot;);
+    leftview(root);
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>left view:124
+</pre></h3>
+  <a href="../trees.html">Back to Topic</a>
+</body>
+</html>

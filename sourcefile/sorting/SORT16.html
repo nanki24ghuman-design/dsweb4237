@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Algorithms</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q16. Enter a string array from the user and perform insertion sort algorithm through recursion. also calculate the worst and best complexity with exact time.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+// Function to perform insertion sort using recursion
+int insertionSort(char a[][50], int n)
+{
+    int j, comparisons = 0;
+    char key[50];
+
+    // Base case
+    if (n &lt;= 1)
+        return 0;
+
+    // Sort the first n-1 strings
+    comparisons = insertionSort(a, n - 1);
+
+    // Take the last string as the key
+    strcpy(key, a[n - 1]);
+    j = n - 2;
+
+    // Move larger strings one position ahead
+    while (j &gt;= 0)
+    {
+        comparisons++;
+
+        if (strcmp(a[j], key) &gt; 0)
+        {
+            strcpy(a[j + 1], a[j]);
+            j--;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    // Place the key in its correct position
+    strcpy(a[j + 1], key);
+
+    return comparisons;
+}
+
+int main()
+{
+    char a[100][50];
+    int n, i, comparisons;
+
+    printf(&quot;Enter the number of strings: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter strings:\n&quot;);
+
+    for (i = 0; i &lt; n; i++)
+    {
+        scanf(&quot;%49s&quot;, a[i]);
+    }
+
+    comparisons = insertionSort(a, n);
+
+    printf(&quot;\nSorted strings:\n&quot;);
+
+    for (i = 0; i &lt; n; i++)
+    {
+        printf(&quot;%s\n&quot;, a[i]);
+    }
+
+    printf(&quot;\nTotal comparisons = %d&quot;, comparisons);
+    printf(&quot;\nBest Case Time Complexity = O(n)&quot;);
+    printf(&quot;\nWorst Case Time Complexity = O(n^2)&quot;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter the number of strings: 5
+Enter strings:
+Dog
+Cat
+Apple
+Ball
+Book
+
+Sorted strings:
+Apple
+Ball
+Book
+Cat
+Dog
+
+Total comparisons = 10
+Best Case Time Complexity = O(n)
+Worst Case Time Complexity = O(n^2)
+</pre></h3>
+  <a href="../sorting.html">Back to Topic</a>
+</body>
+</html>

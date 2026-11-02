@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trees</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q8. Find the maximum depth of binary tree</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Node {
+    int data;
+    struct Node *left, *right;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode =
+        (struct Node*)malloc(sizeof(struct Node));
+
+    newNode-&gt;data = data;
+    newNode-&gt;left = NULL;
+    newNode-&gt;right = NULL;
+
+    return newNode;
+}
+
+int maxDepth(struct Node* root) {
+    if (root == NULL)
+        return 0;
+
+    int leftDepth = maxDepth(root-&gt;left);
+    int rightDepth = maxDepth(root-&gt;right);
+
+    if (leftDepth &gt; rightDepth)
+        return leftDepth + 1;
+    else
+        return rightDepth + 1;
+}
+
+int main() {
+    struct Node* root = createNode(1);
+    root-&gt;left = createNode(2);
+    root-&gt;right = createNode(3);
+    root-&gt;left-&gt;left = createNode(4);
+    root-&gt;left-&gt;right = createNode(5);
+
+    printf(&quot;Maximum depth of binary tree = %d&quot;,
+           maxDepth(root));
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Maximum depth of binary tree = 3
+</pre></h3>
+  <a href="../trees.html">Back to Topic</a>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q21. Print all the permutations of the string &quot;ABCDE&quot;</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+void swap(char *a, char *b)
+{
+    char temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void permute(char str[], int start, int end)
+{
+    int i;
+
+    if(start == end)
+        printf(&quot;%s\n&quot;, str);
+    else
+    {
+        for(i = start; i &lt;= end; i++)
+        {
+            swap(&amp;str[start], &amp;str[i]);
+            permute(str, start + 1, end);
+            swap(&amp;str[start], &amp;str[i]);
+        }
+    }
+}
+
+int main()
+{
+    char str[] = &quot;ABCDE&quot;;
+
+    permute(str, 0, strlen(str) - 1);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>ABCDE
+ABCED
+ABDCE
+ABDEC
+ABECD
+ABEDC
+ACBDE
+ACBED
+ACDBE
+ACDEB
+ACEBD
+ACEDB
+ADBCE
+ADBEC
+ADCBE
+ADCEB
+ADEBC
+ADECB
+AEBCD
+AEBDC
+AECBD
+AECDB
+AEDBC
+AEDCB
+BACDE
+BACED
+BADCE
+BADEC
+BAECD
+BAEDC
+BCADE
+BCAED
+BCDAE
+BCDEA
+BCEAD
+BCEDA
+BDACE
+BDAEC
+BDCAE
+BDCEA
+BDEAC
+BDECA
+BEACD
+BEADC
+BECAD
+BECDA
+BEDAC
+BEDCA
+CABDE
+CABED
+CADBE
+CADEB
+CAEBD
+CAEDB
+CBADE
+CBAED
+CBDAE
+CBDEA
+CBEAD
+CBEDA
+CDABE
+CDAEB
+CDBAE
+CDBEA
+CDEAB
+CDEBA
+CEABD
+CEADB
+CEBAD
+CEBDA
+CEDAB
+CEDBA
+DABCE
+DABEC
+DACBE
+DACEB
+DAEBC
+DAECB
+DBACE
+DBAEC
+DBCAE
+DBCEA
+DBEAC
+DBECA
+DCABE
+DCAEB
+DCBAE
+DCBEA
+DCEAB
+DCEBA
+DEABC
+DEACB
+DEBAC
+DEBCA
+DECAB
+DECBA
+EABCD
+EABDC
+EACBD
+EACDB
+EADBC
+EADCB
+EBACD
+EBADC
+EBCAD
+EBCDA
+EBDAC
+EBDCA
+ECABD
+ECADB
+ECBAD
+ECBDA
+ECDAB
+ECDBA
+EDABC
+EDACB
+EDBAC
+EDBCA
+EDCAB
+EDCBA
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

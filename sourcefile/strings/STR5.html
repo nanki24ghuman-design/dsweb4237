@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q5. Enter the string from user and convert into toggle case</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[100];
+    int i;
+
+    printf(&quot;Enter a string: &quot;);
+    fgets(str, sizeof(str), stdin);
+
+    for(i = 0; str[i] != &#x27;\0&#x27;; i++)
+    {
+        if(str[i] &gt;= &#x27;a&#x27; &amp;&amp; str[i] &lt;= &#x27;z&#x27;)
+            str[i] = str[i] - 32;
+        else if(str[i] &gt;= &#x27;A&#x27; &amp;&amp; str[i] &lt;= &#x27;Z&#x27;)
+            str[i] = str[i] + 32;
+    }
+
+    printf(&quot;Toggle case: %s&quot;, str);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a string: DaTa
+Toggle case: dAtA
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

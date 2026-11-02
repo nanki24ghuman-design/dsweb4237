@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trees</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q11. Create binary tree to binary search tree through array.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Node {
+    int data;
+    struct Node *left, *right;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode =
+        (struct Node*)malloc(sizeof(struct Node));
+
+    newNode-&gt;data = data;
+    newNode-&gt;left = NULL;
+    newNode-&gt;right = NULL;
+
+    return newNode;
+}
+
+// Store tree elements in an array using inorder
+void storeInorder(struct Node* root, int arr[], int *i) {
+    if (root == NULL)
+        return;
+
+    storeInorder(root-&gt;left, arr, i);
+    arr[(*i)++] = root-&gt;data;
+    storeInorder(root-&gt;right, arr, i);
+}
+
+// Sort array using bubble sort
+void sortArray(int arr[], int n) {
+    int temp;
+
+    for (int i = 0; i &lt; n - 1; i++) {
+        for (int j = 0; j &lt; n - i - 1; j++) {
+            if (arr[j] &gt; arr[j + 1]) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+// Replace tree values with sorted array values
+void arrayToBST(struct Node* root, int arr[], int *i) {
+    if (root == NULL)
+        return;
+
+    arrayToBST(root-&gt;left, arr, i);
+    root-&gt;data = arr[(*i)++];
+    arrayToBST(root-&gt;right, arr, i);
+}
+
+void preorder(struct Node* root) {
+    if (root == NULL)
+        return;
+
+    printf(&quot;%d &quot;, root-&gt;data);
+    preorder(root-&gt;left);
+    preorder(root-&gt;right);
+}
+
+void inorder(struct Node* root) {
+    if (root == NULL)
+        return;
+
+    inorder(root-&gt;left);
+    printf(&quot;%d &quot;, root-&gt;data);
+    inorder(root-&gt;right);
+}
+
+int main() {
+    // Create a binary tree
+    struct Node* root = createNode(10);
+    root-&gt;left = createNode(30);
+    root-&gt;right = createNode(15);
+    root-&gt;left-&gt;left = createNode(20);
+    root-&gt;right-&gt;right = createNode(5);
+
+    int arr[100];
+    int i = 0;
+
+    storeInorder(root, arr, &amp;i);
+
+    sortArray(arr, i);
+
+    int index = 0;
+    arrayToBST(root, arr, &amp;index);
+
+    printf(&quot;Preorder of converted BST: &quot;);
+    preorder(root);
+
+    printf(&quot;\nInorder of converted BST: &quot;);
+    inorder(root);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Preorder of converted BST: 15 10 5 20 30
+Inorder of converted BST: 5 10 15 20 30
+</pre></h3>
+  <a href="../trees.html">Back to Topic</a>
+</body>
+</html>

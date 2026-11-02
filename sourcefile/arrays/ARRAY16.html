@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q16. Enter two arrays from the user and check they are same or not</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+int main()
+{
+    int a[5],b[5],i,same=1;
+    printf(&quot;Enter five elements of first array: &quot;);
+    for(i=0;i&lt;5;i++)
+    {
+        scanf(&quot;%d&quot;,&amp;a[i]);
+    }
+    printf(&quot;Enter five elements of second array: &quot;);
+    for(i=0;i&lt;5;i++)
+    {
+        scanf(&quot;%d&quot;,&amp;b[i]);
+    }
+    for(i=0;i&lt;5;i++)
+    {
+        if(a[i]!=b[i])
+        {
+            same=0;
+            break;
+        }
+    }
+    if(same==1)
+    {
+        printf(&quot;Both arrays are same&quot;);
+    }
+    else
+    {
+        printf(&quot;Both arrays are not same&quot;);
+    }
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter five elements of first array: 1 2 3 3 5
+Enter five elements of second array: 1 2 3 4 7
+Both arrays are not same
+OR
+Enter five elements of first array: 1 2 3 4 5
+Enter five elements of second array: 1 2 3 4 5
+Both arrays are  same
+</pre></h3>
+  <a href="../arrays.html">Back to Topic</a>
+</body>
+</html>

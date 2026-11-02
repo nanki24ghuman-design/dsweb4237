@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graph</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q4. Traverse the adjacent list with depth first search</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct node
+{
+    int vertex;
+    struct node *next;
+};
+
+struct node *a[10];
+int visited[10];
+
+// Function to perform DFS
+void DFS(int start)
+{
+    struct node *temp;
+
+    printf(&quot;%d &quot;, start);
+    visited[start] = 1;
+
+    temp = a[start];
+
+    while (temp != NULL)
+    {
+        if (visited[temp-&gt;vertex] == 0)
+        {
+            DFS(temp-&gt;vertex);
+        }
+
+        temp = temp-&gt;next;
+    }
+}
+
+int main()
+{
+    int v, e, i, x, y, start;
+    struct node *temp;
+
+    printf(&quot;Enter number of vertices: &quot;);
+    scanf(&quot;%d&quot;, &amp;v);
+
+    printf(&quot;Enter number of edges: &quot;);
+    scanf(&quot;%d&quot;, &amp;e);
+
+    for (i = 0; i &lt; v; i++)
+        a[i] = NULL;
+
+    // Enter edges
+    for (i = 0; i &lt; e; i++)
+    {
+        printf(&quot;Enter two vertices: &quot;);
+        scanf(&quot;%d %d&quot;, &amp;x, &amp;y);
+
+        temp = (struct node *)malloc(sizeof(struct node));
+        temp-&gt;vertex = y;
+        temp-&gt;next = a[x];
+        a[x] = temp;
+
+        temp = (struct node *)malloc(sizeof(struct node));
+        temp-&gt;vertex = x;
+        temp-&gt;next = a[y];
+        a[y] = temp;
+    }
+
+    for (i = 0; i &lt; v; i++)
+        visited[i] = 0;
+
+    printf(&quot;Enter starting vertex: &quot;);
+    scanf(&quot;%d&quot;, &amp;start);
+
+    printf(&quot;DFS Traversal: &quot;);
+    DFS(start);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter number of vertices: 4
+Enter number of edges: 4
+Enter two vertices: 0 1
+Enter two vertices: 0 2
+Enter two vertices: 1 3
+Enter two vertices: 2 3
+Enter starting vertex: 0
+
+DFS Traversal: 0 2 3 1
+</pre></h3>
+  <a href="../graph.html">Back to Topic</a>
+</body>
+</html>

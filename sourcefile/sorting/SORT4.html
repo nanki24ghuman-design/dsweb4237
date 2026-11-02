@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Algorithms</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q4. Enter a integer array from the user and perform bubble sort algorithm through recursion. also calculate the worst and best complexity with exact time.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+// Function to perform bubble sort using recursion
+void bubbleSort(int a[], int n)
+{
+    int i, temp, swapped = 0;
+
+    // Stop when the array has one element
+    if (n == 1)
+        return;
+
+    // Compare adjacent elements
+    for (i = 0; i &lt; n - 1; i++)
+    {
+        if (a[i] &gt; a[i + 1])
+        {
+            // Swap the elements
+            temp = a[i];
+            a[i] = a[i + 1];
+            a[i + 1] = temp;
+
+            swapped = 1;
+        }
+    }
+
+    // Stop if the array is already sorted
+    if (swapped == 0)
+        return;
+
+    // Call the function again
+    bubbleSort(a, n - 1);
+}
+
+int main()
+{
+    int a[100], n, i;
+
+    printf(&quot;Enter the number of elements: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter array elements:\n&quot;);
+    for (i = 0; i &lt; n; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;a[i]);
+    }
+
+    // Call the sorting function
+    bubbleSort(a, n);
+
+    printf(&quot;Sorted array:\n&quot;);
+    for (i = 0; i &lt; n; i++)
+    {
+        printf(&quot;%d &quot;, a[i]);
+    }
+
+    printf(&quot;\nBest Case Time Complexity = O(n)&quot;);
+    printf(&quot;\nWorst Case Time Complexity = O(n^2)&quot;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter the number of elements: 5
+Enter array elements:
+68 29 16 26 15
+Sorted array:
+15 16 26 29 68
+Best Case Time Complexity = O(n)
+Worst Case Time Complexity = O(n^2)
+</pre></h3>
+  <a href="../sorting.html">Back to Topic</a>
+</body>
+</html>

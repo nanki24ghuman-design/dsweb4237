@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q26. Enter the string, print the first and second words, and find the start index of the second word</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[100];
+    int i = 0, start, end;
+
+    printf(&quot;Enter a string: &quot;);
+    fgets(str, sizeof(str), stdin);
+
+    while(str[i] == &#x27; &#x27;)
+        i++;
+
+    start = i;
+
+    while(str[i] != &#x27; &#x27; &amp;&amp; str[i] != &#x27;\0&#x27; &amp;&amp; str[i] != &#x27;\n&#x27;)
+        i++;
+
+    end = i;
+
+    printf(&quot;First word: &quot;);
+
+    for(i = start; i &lt; end; i++)
+        printf(&quot;%c&quot;, str[i]);
+
+    i = end;
+
+    while(str[i] == &#x27; &#x27;)
+        i++;
+
+    if(str[i] == &#x27;\0&#x27; || str[i] == &#x27;\n&#x27;)
+    {
+        printf(&quot;\nSecond word not found&quot;);
+        return 0;
+    }
+
+    start = i;
+
+    printf(&quot;\nSecond word: &quot;);
+
+    while(str[i] != &#x27; &#x27; &amp;&amp; str[i] != &#x27;\0&#x27; &amp;&amp; str[i] != &#x27;\n&#x27;)
+    {
+        printf(&quot;%c&quot;, str[i]);
+        i++;
+    }
+
+    printf(&quot;\nStart index of second word = %d&quot;, start);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a string: Data Structure
+First word: Data
+Second word: Structure
+Start index of second word = 5
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

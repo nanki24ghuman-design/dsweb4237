@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trees</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q9. Find inorder predecessor and inorder successor of binary search tree (dynamically represented)</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Node {
+    int data;
+    struct Node *left, *right;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode =
+        (struct Node*)malloc(sizeof(struct Node));
+
+    newNode-&gt;data = data;
+    newNode-&gt;left = NULL;
+    newNode-&gt;right = NULL;
+
+    return newNode;
+}
+
+struct Node* insert(struct Node* root, int data) {
+    if (root == NULL)
+        return createNode(data);
+
+    if (data &lt; root-&gt;data)
+        root-&gt;left = insert(root-&gt;left, data);
+    else if (data &gt; root-&gt;data)
+        root-&gt;right = insert(root-&gt;right, data);
+
+    return root;
+}
+
+struct Node* findPredecessor(struct Node* root, int key) {
+    struct Node* pred = NULL;
+
+    while (root != NULL) {
+        if (key &gt; root-&gt;data) {
+            pred = root;
+            root = root-&gt;right;
+        }
+        else if (key &lt; root-&gt;data) {
+            root = root-&gt;left;
+        }
+        else {
+            if (root-&gt;left != NULL) {
+                root = root-&gt;left;
+                while (root-&gt;right != NULL)
+                    root = root-&gt;right;
+                pred = root;
+            }
+            break;
+        }
+    }
+
+    return pred;
+}
+
+struct Node* findSuccessor(struct Node* root, int key) {
+    struct Node* succ = NULL;
+
+    while (root != NULL) {
+        if (key &lt; root-&gt;data) {
+            succ = root;
+            root = root-&gt;left;
+        }
+        else if (key &gt; root-&gt;data) {
+            root = root-&gt;right;
+        }
+        else {
+            if (root-&gt;right != NULL) {
+                root = root-&gt;right;
+                while (root-&gt;left != NULL)
+                    root = root-&gt;left;
+                succ = root;
+            }
+            break;
+        }
+    }
+
+    return succ;
+}
+
+int main() {
+    struct Node* root = NULL;
+    struct Node* pred;
+    struct Node* succ;
+    int n, value, key;
+
+    printf(&quot;Enter number of nodes: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter node values: &quot;);
+    for (int i = 0; i &lt; n; i++) {
+        scanf(&quot;%d&quot;, &amp;value);
+        root = insert(root, value);
+    }
+
+    printf(&quot;Enter key: &quot;);
+    scanf(&quot;%d&quot;, &amp;key);
+
+    pred = findPredecessor(root, key);
+    succ = findSuccessor(root, key);
+
+    if (pred != NULL)
+        printf(&quot;Inorder Predecessor = %d\n&quot;, pred-&gt;data);
+    else
+        printf(&quot;Inorder Predecessor does not exist\n&quot;);
+
+    if (succ != NULL)
+        printf(&quot;Inorder Successor = %d\n&quot;, succ-&gt;data);
+    else
+        printf(&quot;Inorder Successor does not exist\n&quot;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter number of nodes: 5
+Enter node values: 10
+24
+19
+29
+34
+Enter key: 16
+Inorder Predecessor = 10
+Inorder Successor = 19
+</pre></h3>
+  <a href="../trees.html">Back to Topic</a>
+</body>
+</html>

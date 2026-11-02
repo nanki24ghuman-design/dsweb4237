@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graph</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q1. Enter the vertices and edges and represent in adjacency matrix and print it.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+  int a[10][10], v, e;
+   int i, j, x, y;
+
+  printf(&quot;Enter number of vertices: &quot;);
+  scanf(&quot;%d&quot;, &amp;v);
+
+  printf(&quot;Enter number of edges: &quot;);
+  scanf(&quot;%d&quot;, &amp;e);
+
+  // Initialize matrix with 0
+  for (i = 0; i &lt; v; i++)
+   {
+     for (j = 0; j &lt; v; j++)
+       {
+        a[i][j] = 0;
+      }
+    }
+
+  // Enter edges
+  for (i = 0; i &lt; e; i++)
+   {
+      printf(&quot;Enter two vertices: &quot;);
+      scanf(&quot;%d %d&quot;, &amp;x, &amp;y);
+
+      a[x][y] = 1;
+      a[y][x] = 1;
+   }
+
+  // Print adjacency matrix
+  printf(&quot;\nAdjacency Matrix:\n&quot;);
+
+   for (i = 0; i &lt; v; i++)
+  {
+    for (j = 0; j &lt; v; j++)
+      {
+        printf(&quot;%d &quot;, a[i][j]);
+      }
+        printf(&quot;\n&quot;);
+    }
+
+  return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter number of vertices: 4
+Enter number of edges: 3
+Enter two vertices: 4 5
+Enter two vertices: 4 6
+Enter two vertices: 5 7
+
+Adjacency Matrix:
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+</pre></h3>
+  <a href="../graph.html">Back to Topic</a>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Dimensional Array</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q5. Enter a matrix from user and copy it in another matrix of same size</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+int main()
+{
+    int a[2][2],b[2][2],i,j;
+    printf(&quot;Enter four elements of matrix: &quot;);
+    for(i=0;i&lt;2;i++)
+    {
+        for(j=0;j&lt;2;j++)
+        {
+            scanf(&quot;%d&quot;,&amp;a[i][j]);
+        }
+    }
+    for(i=0;i&lt;2;i++)
+    {
+        for(j=0;j&lt;2;j++)
+        {
+            b[i][j]=a[i][j];
+        }
+    }
+    printf(&quot;Copied matrix:\n&quot;);
+    for(i=0;i&lt;2;i++)
+    {
+        for(j=0;j&lt;2;j++)
+        {
+            printf(&quot;%d &quot;,b[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>
+Enter four elements of matrix:
+Enter elements:
+1  2
+3  4
+
+Copied matrix:
+1  2
+3  4
+</pre></h3>
+  <a href="../multidimensionalarray.html">Back to Topic</a>
+</body>
+</html>

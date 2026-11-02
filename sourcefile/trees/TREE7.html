@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trees</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q7. Construct binary tree from postorder and inorder traversal</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Node {
+    char data;
+    struct Node *left, *right;
+};
+
+struct Node* createNode(char data) {
+    struct Node* newNode =
+        (struct Node*)malloc(sizeof(struct Node));
+
+    newNode-&gt;data = data;
+    newNode-&gt;left = NULL;
+    newNode-&gt;right = NULL;
+
+    return newNode;
+}
+
+int search(char inorder[], int start, int end, char value) {
+    for (int i = start; i &lt;= end; i++) {
+        if (inorder[i] == value)
+            return i;
+    }
+    return -1;
+}
+
+struct Node* buildTree(char inorder[], char postorder[], int start, int end, int *postIndex) {
+    if (start &gt; end)
+        return NULL;
+
+    char value = postorder[(*postIndex)--];
+    struct Node* root = createNode(value);
+
+    if (start == end)
+        return root;
+
+    int pos = search(inorder, start, end, value);
+
+    root-&gt;right = buildTree(inorder, postorder,  pos + 1, end, postIndex);
+
+    root-&gt;left = buildTree(inorder, postorder, start, pos - 1, postIndex);
+
+    return root;
+}
+
+void preorder(struct Node* root) {
+    if (root == NULL)
+        return;
+
+    printf(&quot;%c &quot;, root-&gt;data);
+    preorder(root-&gt;left);
+    preorder(root-&gt;right);
+}
+
+int main() {
+    char inorder[] = {&#x27;D&#x27;, &#x27;B&#x27;, &#x27;E&#x27;, &#x27;A&#x27;, &#x27;F&#x27;, &#x27;C&#x27;};
+    char postorder[] = {&#x27;D&#x27;, &#x27;E&#x27;, &#x27;B&#x27;, &#x27;F&#x27;, &#x27;C&#x27;, &#x27;A&#x27;};
+
+    int n = sizeof(inorder) / sizeof(inorder[0]);
+    int postIndex = n - 1;
+
+    struct Node* root = buildTree(inorder, postorder, 0, n - 1, &amp;postIndex);
+
+    printf(&quot;Preorder traversal: &quot;);
+    preorder(root);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Preorder traversal: A B D E C F
+</pre></h3>
+  <a href="../trees.html">Back to Topic</a>
+</body>
+</html>

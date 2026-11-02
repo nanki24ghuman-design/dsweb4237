@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stacks</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q12. Create a program to evaluate the postfix expression.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int stack[50], top = -1;
+
+void push(int x)
+{
+    stack[++top] = x;
+}
+
+int pop()
+{
+    return stack[top--];
+}
+
+int main()
+{
+    char exp[50], ch;
+    int i, a, b;
+
+    printf(&quot;Enter postfix expression: &quot;);
+    scanf(&quot;%s&quot;, exp);
+
+    for(i = 0; exp[i] != &#x27;\0&#x27;; i++)
+    {
+        ch = exp[i];
+
+        if(ch &gt;= &#x27;0&#x27; &amp;&amp; ch &lt;= &#x27;9&#x27;)
+            push(ch - &#x27;0&#x27;);
+
+        else
+        {
+            b = pop();
+            a = pop();
+
+            if(ch == &#x27;+&#x27;)
+                push(a + b);
+            else if(ch == &#x27;-&#x27;)
+                push(a - b);
+            else if(ch == &#x27;*&#x27;)
+                push(a * b);
+            else if(ch == &#x27;/&#x27;)
+                push(a / b);
+        }
+    }
+
+    printf(&quot;Result = %d&quot;, pop());
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>-
+Enter postfix expression: 23+
+Result = 5
+ANOTHER EXAMPLE:-
+Enter postfix expression: 23*4+
+Result = 10
+</pre></h3>
+  <a href="../stacks.html">Back to Topic</a>
+</body>
+</html>

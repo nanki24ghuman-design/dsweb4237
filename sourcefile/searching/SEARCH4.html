@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Searching Algorithms</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q4. Enter a string from the user, enter a character and perform linear search algorithm through iteration.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[100], ch;
+    int i, found = 0;
+
+    printf(&quot;Enter a string: &quot;);
+    scanf(&quot;%s&quot;, str);
+
+    printf(&quot;Enter a character to search: &quot;);
+    scanf(&quot; %c&quot;, &amp;ch);
+
+    for(i = 0; str[i] != &#x27;\0&#x27;; i++)
+    {
+        if(str[i] == ch)
+        {
+            printf(&quot;Character found at position %d&quot;, i + 1);
+            found = 1;
+            break;
+        }
+    }
+
+    if(found == 0)
+    {
+        printf(&quot;Character not found&quot;);
+    }
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>-
+Enter a string: hello
+Enter a character to search: l
+Character found at position 3
+</pre></h3>
+  <a href="../searching.html">Back to Topic</a>
+</body>
+</html>

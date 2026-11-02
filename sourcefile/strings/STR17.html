@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q17. Enter the string from user and count the number of vowels</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[100];
+    int i, count = 0;
+
+    printf(&quot;Enter a string: &quot;);
+    fgets(str, sizeof(str), stdin);
+
+    for(i = 0; str[i] != &#x27;\0&#x27;; i++)
+    {
+        if(str[i] == &#x27;a&#x27; || str[i] == &#x27;e&#x27; ||
+           str[i] == &#x27;i&#x27; || str[i] == &#x27;o&#x27; ||
+           str[i] == &#x27;u&#x27; || str[i] == &#x27;A&#x27; ||
+           str[i] == &#x27;E&#x27; || str[i] == &#x27;I&#x27; ||
+           str[i] == &#x27;O&#x27; || str[i] == &#x27;U&#x27;)
+            count++;
+    }
+
+    printf(&quot;Number of vowels = %d&quot;, count);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a string: Data Structure
+Number of vowels = 5
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

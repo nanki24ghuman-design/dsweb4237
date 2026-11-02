@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Algorithms</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q17. Enter a string array from the user and perform merge sort algorithm through iteration. also calculate the worst and best complexity with exact time.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+// Function to merge two sorted parts
+int merge(char a[][50], char temp[][50], int left, int mid, int right)
+{
+    int i = left, j = mid + 1, k = left;
+    int comparisons = 0;
+
+    while (i &lt;= mid &amp;&amp; j &lt;= right)
+    {
+        comparisons++;
+
+        if (strcmp(a[i], a[j]) &lt;= 0)
+        {
+            strcpy(temp[k], a[i]);
+            i++;
+        }
+        else
+        {
+            strcpy(temp[k], a[j]);
+            j++;
+        }
+        k++;
+    }
+
+    while (i &lt;= mid)
+    {
+        strcpy(temp[k], a[i]);
+        i++;
+        k++;
+    }
+
+    while (j &lt;= right)
+    {
+        strcpy(temp[k], a[j]);
+        j++;
+        k++;
+    }
+
+    for (i = left; i &lt;= right; i++)
+    {
+        strcpy(a[i], temp[i]);
+    }
+
+    return comparisons;
+}
+
+// Function to perform iterative merge sort
+int mergeSort(char a[][50], int n)
+{
+    char temp[100][50];
+    int size, left, mid, right, i;
+    int comparisons = 0;
+
+    for (size = 1; size &lt; n; size = size * 2)
+    {
+        for (left = 0; left &lt; n - size; left = left + 2 * size)
+        {
+            mid = left + size - 1;
+            right = left + 2 * size - 1;
+
+            if (right &gt;= n)
+                right = n - 1;
+
+            comparisons += merge(a, temp, left, mid, right);
+        }
+    }
+
+    return comparisons;
+}
+
+int main()
+{
+    char a[100][50];
+    int n, i, comparisons;
+
+    printf(&quot;Enter the number of strings: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter strings:\n&quot;);
+
+    for (i = 0; i &lt; n; i++)
+    {
+        scanf(&quot;%49s&quot;, a[i]);
+    }
+
+    comparisons = mergeSort(a, n);
+
+    printf(&quot;\nSorted strings:\n&quot;);
+
+    for (i = 0; i &lt; n; i++)
+    {
+        printf(&quot;%s\n&quot;, a[i]);
+    }
+
+    printf(&quot;\nTotal comparisons = %d&quot;, comparisons);
+    printf(&quot;\nBest Case Time Complexity = O(n log n)&quot;);
+    printf(&quot;\nWorst Case Time Complexity = O(n log n)&quot;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter the number of strings: 5
+Enter strings:
+Fish
+Zebra
+Tiger
+Lion
+Goat
+
+Sorted strings:
+Fish
+Goat
+Lion
+Tiger
+Zebra
+
+Total comparisons = 7
+Best Case Time Complexity = O(n log n)
+Worst Case Time Complexity = O(n log n)
+</pre></h3>
+  <a href="../sorting.html">Back to Topic</a>
+</body>
+</html>

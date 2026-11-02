@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q15. Enter the string and a character, then search for the character in the string</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[100], ch;
+    int i, found = 0;
+
+    printf(&quot;Enter a string: &quot;);
+    fgets(str, sizeof(str), stdin);
+
+    printf(&quot;Enter a character: &quot;);
+    scanf(&quot;%c&quot;, &amp;ch);
+
+    for(i = 0; str[i] != &#x27;\0&#x27;; i++)
+    {
+        if(str[i] == ch)
+        {
+            found = 1;
+            break;
+        }
+    }
+
+    if(found == 1)
+        printf(&quot;Character found&quot;);
+    else
+        printf(&quot;Character not found&quot;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a string: Pointer
+Enter a character: o
+Character found
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions Given by Sir</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q21. Divide two polynomial equations using a linked list.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct node
+{
+    float coeff;
+    int power;
+    struct node *next;
+};
+
+struct node *insertend(struct node *start, float c, int p)
+{
+    struct node *temp, *ptr;
+
+    temp = (struct node *)malloc(sizeof(struct node));
+    temp-&gt;coeff = c;
+    temp-&gt;power = p;
+    temp-&gt;next = NULL;
+
+    if(start == NULL)
+        return temp;
+
+    ptr = start;
+
+    while(ptr-&gt;next != NULL)
+        ptr = ptr-&gt;next;
+
+    ptr-&gt;next = temp;
+
+    return start;
+}
+
+struct node *addterm(struct node *start, float c, int p)
+{
+    struct node *ptr, *prev, *temp;
+
+    if(c &gt; -0.0001 &amp;&amp; c &lt; 0.0001)
+        return start;
+
+    ptr = start;
+    prev = NULL;
+
+    while(ptr != NULL &amp;&amp; ptr-&gt;power &gt; p)
+    {
+        prev = ptr;
+        ptr = ptr-&gt;next;
+    }
+
+    if(ptr != NULL &amp;&amp; ptr-&gt;power == p)
+    {
+        ptr-&gt;coeff = ptr-&gt;coeff + c;
+
+        if(ptr-&gt;coeff &gt; -0.0001 &amp;&amp; ptr-&gt;coeff &lt; 0.0001)
+        {
+            if(prev == NULL)
+                start = ptr-&gt;next;
+            else
+                prev-&gt;next = ptr-&gt;next;
+
+            free(ptr);
+        }
+
+        return start;
+    }
+
+    temp = (struct node *)malloc(sizeof(struct node));
+    temp-&gt;coeff = c;
+    temp-&gt;power = p;
+    temp-&gt;next = ptr;
+
+    if(prev == NULL)
+        start = temp;
+    else
+        prev-&gt;next = temp;
+
+    return start;
+}
+
+void display(struct node *start)
+{
+    struct node *ptr = start;
+
+    if(start == NULL)
+    {
+        printf(&quot;0\n&quot;);
+        return;
+    }
+
+    while(ptr != NULL)
+    {
+        printf(&quot;%.2fx^%d&quot;, ptr-&gt;coeff, ptr-&gt;power);
+
+        if(ptr-&gt;next != NULL)
+            printf(&quot; + &quot;);
+
+        ptr = ptr-&gt;next;
+    }
+
+    printf(&quot;\n&quot;);
+}
+
+int main()
+{
+    struct node *p1 = NULL, *p2 = NULL;
+    struct node *quotient = NULL, *remainder = NULL;
+    struct node *a, *b, *temp;
+    int n, i, p;
+    float c, factor;
+
+    printf(&quot;Enter number of terms in dividend: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for(i = 1; i &lt;= n; i++)
+    {
+        printf(&quot;Enter coefficient and power: &quot;);
+        scanf(&quot;%f%d&quot;, &amp;c, &amp;p);
+        p1 = insertend(p1, c, p);
+    }
+
+    printf(&quot;Enter number of terms in divisor: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for(i = 1; i &lt;= n; i++)
+    {
+        printf(&quot;Enter coefficient and power: &quot;);
+        scanf(&quot;%f%d&quot;, &amp;c, &amp;p);
+        p2 = insertend(p2, c, p);
+    }
+
+    a = p1;
+
+    while(a != NULL)
+    {
+        remainder = addterm(remainder, a-&gt;coeff, a-&gt;power);
+        a = a-&gt;next;
+    }
+
+    if(p2 == NULL || p2-&gt;coeff == 0)
+    {
+        printf(&quot;Invalid divisor.\n&quot;);
+        return 0;
+    }
+
+    while(remainder != NULL &amp;&amp;
+          remainder-&gt;power &gt;= p2-&gt;power)
+    {
+        factor = remainder-&gt;coeff / p2-&gt;coeff;
+        p = remainder-&gt;power - p2-&gt;power;
+
+        quotient = addterm(quotient, factor, p);
+
+        b = p2;
+
+        while(b != NULL)
+        {
+            remainder = addterm(remainder,
+                                -factor * b-&gt;coeff,
+                                p + b-&gt;power);
+
+            b = b-&gt;next;
+        }
+    }
+
+    printf(&quot;Quotient: &quot;);
+    display(quotient);
+
+    printf(&quot;Remainder: &quot;);
+    display(remainder);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter number of terms in dividend: 3
+Enter coefficient and power: 1 2
+Enter coefficient and power: 0 5
+Enter coefficient and power: -1 4
+Enter number of terms in divisor: 2
+Enter coefficient and power: 1 1
+Enter coefficient and power: -1 0
+Quotient: -1.00x^3 + -1.00x^2
+Remainder: 0
+</pre></h3>
+  <h2>Complexity</h2>
+  <h3><pre>Let m = terms in dividend, n = terms in divisor,
+q = terms in quotient, r = maximum terms in remainder.
+
+Time Complexity:
+insertend() and addterm() : O(k) each  (k = current length of the list)
+Building the input lists  : O(m^2 + n^2)
+Division steps            : about O(q * n * r)
+(each of the q steps updates the remainder with n terms of the divisor)
+
+Space Complexity: O(m + n + q + r).
+</pre></h3>
+  <a href="../questions.html">Back to Topic</a>
+</body>
+</html>

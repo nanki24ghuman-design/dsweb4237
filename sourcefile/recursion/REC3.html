@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recursion</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q3. Calculate the sum of natural numbers till 10 using recursion.</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+int sum(int n){
+    if(n==0){
+    return 0;
+    }
+    return n +sum(n-1);
+}
+int main(){
+    int result;
+    result=sum(10);
+    printf(&quot;the sum of number till 10 is %d&quot;,result);
+    return 0;
+
+}
+  </h3></pre>
+  <a href="../recursion.html">Back to Topic</a>
+</body>
+</html>

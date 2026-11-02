@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions Given by Sir</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q2. binary search.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a[5], i, value;
+    int low, high, mid, found = 0;
+
+    printf(&quot;Enter 5 numbers in ascending order: &quot;);
+
+    for(i = 0; i &lt; 5; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;a[i]);
+    }
+
+    printf(&quot;Enter the value to search: &quot;);
+    scanf(&quot;%d&quot;, &amp;value);
+
+    low = 0;
+    high = 4;
+
+    while(low &lt;= high)
+    {
+        mid = (low + high) / 2;
+
+        if(a[mid] == value)
+        {
+            found = 1;
+            break;
+        }
+        else if(value &lt; a[mid])
+        {
+            high = mid - 1;
+        }
+        else
+        {
+            low = mid + 1;
+        }
+    }
+
+    if(found == 1)
+    {
+        printf(&quot;Value found at position %d&quot;, mid + 1);
+    }
+    else
+    {
+        printf(&quot;Value not found&quot;);
+    }
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter 5 numbers in ascending order: 10 20 30 40 50
+Enter the value to search: 40
+Value found at position 4
+</pre></h3>
+  <h2>Complexity</h2>
+  <h3><pre>Time Complexity:
+Reading the input : O(n)
+Binary search     : Best O(1), Worst O(log n)
+(each step cuts the search area to half)
+
+Space Complexity: O(n) for the array, O(1) extra space.
+</pre></h3>
+  <a href="../questions.html">Back to Topic</a>
+</body>
+</html>

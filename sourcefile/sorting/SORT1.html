@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Algorithms</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q1. Enter a integer array from the user and perform selection sort algorithm through iteration. also calculate the worst and best complexity with exact time.</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+
+int main()
+{
+    int array[100], size, i, j, minimum, temp;
+    int comparisons = 0;
+
+    printf(&quot;Enter the number of elements: &quot;);
+    scanf(&quot;%d&quot;, &amp;size);
+
+    printf(&quot;Enter array elements:\n&quot;);
+    for (i = 0; i &lt; size; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;array[i]);
+    }
+
+    // Selection Sort using iteration
+    for (i = 0; i &lt; size - 1; i++)
+    {
+        minimum = i;
+
+        for (j = i + 1; j &lt; size; j++)
+        {
+            comparisons++;
+
+            if (array[j] &lt; array[minimum])
+            {
+                minimum = j;
+            }
+        }
+
+        // Swap the elements
+        temp = array[i];
+        array[i] = array[minimum];
+        array[minimum] = temp;
+    }
+
+    printf(&quot;Sorted array in ascending order:\n&quot;);
+    for (i = 0; i &lt; size; i++)
+    {
+        printf(&quot;%d &quot;, array[i]);
+    }
+
+    printf(&quot;\nTotal comparisons = %d&quot;, comparisons);
+
+    printf(&quot;\nBest Case Time Complexity = O(n^2)&quot;);
+    printf(&quot;\nWorst Case Time Complexity = O(n^2)&quot;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter the number of elements: 5
+Enter array elements:
+68 29 16 26 15
+Sorted array in ascending order:
+15 16 26 29 68
+Total comparisons = 10
+Best Case Time Complexity = O(n^2)
+Worst Case Time Complexity = O(n^2)
+</pre></h3>
+  <a href="../sorting.html">Back to Topic</a>
+</body>
+</html>

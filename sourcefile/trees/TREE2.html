@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trees</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q2. Create binary search tree dynamically (insert, delete, search, preorder, inorder, postorder, minimum element)</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+struct BST{
+    int data;
+    struct BST *left,*right;
+};
+struct BST *start=NULL, *temp ,*search;
+void insert(){
+    int value;
+temp=(struct BST*)malloc(sizeof(struct BST));
+printf(&quot;enter the value you want to insert:\n&quot;);
+scanf(&quot;%d&quot;,&amp;value);
+if(temp!=NULL){
+    temp-&gt;data=value;
+    temp-&gt;left=NULL;
+    temp-&gt;right=NULL;
+}
+if(start==NULL){
+    start=temp;
+}
+else{
+    search=start;
+    while(search!=NULL){
+        if(temp-&gt;data==search-&gt;data){
+            free(temp);
+            break;
+        }
+        else if(temp-&gt;data&lt;search-&gt;data){
+            if(search-&gt;left!=NULL){
+                search=search-&gt;left;
+            }
+            else{
+                search-&gt;left=temp;
+                break;
+            }
+            
+        }
+        else if(temp-&gt;data&gt;search-&gt;data){
+                if(search-&gt;right!=NULL){
+                    search=search-&gt;right;
+                }
+                else{
+                    search-&gt;right=temp;
+                    break;
+                }
+            }
+    }
+}
+printf(&quot;insertion completed\n&quot;);
+}
+
+
+
+void preorder(struct BST*temp){
+    if(temp==NULL){
+        return;
+    }
+    printf(&quot;%d&quot;,temp-&gt;data);
+    preorder(temp-&gt;left);
+    preorder(temp-&gt;right);
+}
+void inorder(struct BST*temp){
+    if(temp!=NULL){
+        inorder(temp-&gt;left);
+        printf(&quot;%d&quot;,temp-&gt;data);
+        inorder(temp-&gt;right);
+    }
+}
+void postorder(struct BST*temp){
+    if(temp==NULL){
+        return;
+    }
+    postorder(temp-&gt;left);
+    postorder(temp-&gt;right);
+    printf(&quot;%d&quot;,temp-&gt;data);
+}
+void minimum(){
+    if(start==NULL){
+        printf(&quot;tree is empty\n&quot;);
+        return;
+    }
+    search=start;
+    while(search-&gt;left!=NULL){
+        search=search-&gt;left;
+    }
+    printf(&quot;minimum elemnet =%d\n&quot;,search-&gt;data);
+}
+struct BST*deletenode(struct BST *temp,int value){
+    struct BST*child;
+    if(temp==NULL)
+        return NULL;
+    if(value&lt;temp-&gt;data){
+        temp-&gt;left =deletenode(temp-&gt;left,value);
+    }
+    else if(value&gt;temp-&gt;data){
+        temp-&gt;right=deletenode(temp-&gt;right,value);
+    }
+    else{
+        if(temp-&gt;left==NULL&amp;&amp;temp-&gt;right==NULL){
+            free(temp);
+            return NULL;
+        }
+        if(temp-&gt;left==NULL){
+            child=temp-&gt;right;
+            free(temp);
+            return child;
+        }
+        if(temp-&gt;right==NULL){
+            child=temp-&gt;left;
+            free(temp);
+            return child;
+        }
+        child=temp-&gt;right;
+        while(child-&gt;left!=NULL){
+            child=child-&gt;left;
+        }
+        temp-&gt;data=child-&gt;data;
+        temp-&gt;right=deletenode(temp-&gt;right,child-&gt;data);
+    }
+    return temp;
+}
+void deletion(){
+    int value;
+    if(start==NULL){
+        printf(&quot;tree is empty\n&quot;);
+        return;
+    }
+    printf(&quot;enter the value you want to delete:&quot;);
+    scanf(&quot;%d&quot;,&amp;value);
+    start=deletenode(start,value);
+    printf(&quot;deletion completed \n&quot;);
+}
+int main(){
+int choices;
+ do{
+    printf(&quot;--------binary search tree-------\n&quot;);
+    printf(&quot;1.insert\n 2. deletion\n 3. search\n 4. reorder\n 5. inorder\n 6. postorder\n 7.minimum element \n 8. exit\n&quot;);
+    printf(&quot;enter your choice:&quot;);
+    scanf(&quot;%d&quot;,&amp;choices);
+    switch(choices){
+        case 1:
+        insert();
+        break;
+        case 2:
+        deletion();
+        break;
+        //case 3:
+        //find();
+        //break;
+        case 4:
+        if(start==NULL)
+    printf(&quot;tree is empty\n&quot;);
+    else{
+        printf(&quot;preorder:&quot;);
+        preorder(start);
+        printf(&quot;\n&quot;);
+    }
+    break;
+     case 5:
+        if(start==NULL)
+    printf(&quot;tree is empty\n&quot;);
+    else{
+        printf(&quot;inorder:&quot;);
+        inorder(start);
+        printf(&quot;\n&quot;);
+    }
+    break;
+     case 6:
+        if(start==NULL)
+    printf(&quot;tree is empty\n&quot;);
+    else{
+        printf(&quot;postorder:&quot;);
+        postorder(start);
+        printf(&quot;\n&quot;);
+    }
+    break;
+     case 7:
+        minimum();
+    break;
+    case 8:
+    printf(&quot;program end\n&quot;);
+    break;
+    default:
+    printf(&quot;invalid choce\n&quot;);
+    }
+}
+    while(choices!=8);
+return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:1
+enter the value you want to insert:
+10
+insertion completed
+--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:1
+enter the value you want to insert:
+12
+insertion completed
+--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:1
+enter the value you want to insert:
+15
+insertion completed
+--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:1
+enter the value you want to insert:
+20
+insertion completed
+--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:1
+enter the value you want to insert:
+18
+insertion completed
+--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:2
+enter the value you want to delete:12
+deletion completed
+--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:3
+invalid choce
+--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:
+3
+invalid choce
+--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:4
+preorder:10152018
+--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:
+4
+preorder:10152018
+--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:5
+inorder:10151820
+--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:
+5
+inorder:10151820
+--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:6
+postorder:18201510
+--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:
+6
+postorder:18201510
+--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:
+7
+minimum elemnet =10
+--------binary search tree-------
+1.insert
+ 2. deletion
+ 3. search
+ 4. reorder
+ 5. inorder
+ 6. postorder
+ 7.minimum element
+ 8. exit
+enter your choice:8
+program end
+</pre></h3>
+  <a href="../trees.html">Back to Topic</a>
+</body>
+</html>

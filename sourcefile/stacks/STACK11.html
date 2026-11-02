@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stacks</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q11. Create a program to evaluate the prefix expression.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+int stack[50];
+int top = -1;
+
+void push(int n)
+{
+    top++;
+    stack[top] = n;
+}
+
+int pop()
+{
+    int n = stack[top];
+    top--;
+    return n;
+}
+
+int main()
+{
+    char exp[50], ch;
+    int i, a, b, result;
+
+    printf(&quot;Enter prefix expression: &quot;);
+    scanf(&quot;%s&quot;, exp);
+
+    for(i = strlen(exp) - 1; i &gt;= 0; i--)
+    {
+        ch = exp[i];
+
+        if(isdigit(ch))
+        {
+            push(ch - &#x27;0&#x27;);
+        }
+        else
+        {
+            a = pop();
+            b = pop();
+
+            if(ch == &#x27;+&#x27;)
+                result = a + b;
+            else if(ch == &#x27;-&#x27;)
+                result = a - b;
+            else if(ch == &#x27;*&#x27;)
+                result = a * b;
+            else if(ch == &#x27;/&#x27;)
+                result = a / b;
+
+            push(result);
+        }
+    }
+
+    printf(&quot;Result = %d&quot;, pop());
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>-
+Enter prefix expression: +23
+Result = 5
+ANOTHER EXAMPLE:-
+Enter prefix expression: *+234
+Result = 20
+</pre></h3>
+  <a href="../stacks.html">Back to Topic</a>
+</body>
+</html>

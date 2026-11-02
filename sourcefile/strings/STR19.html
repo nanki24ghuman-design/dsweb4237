@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q19. Enter the string from user and convert it into a float value</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[100];
+    int i = 0, sign = 1;
+    float num = 0, place = 0.1;
+
+    printf(&quot;Enter a number: &quot;);
+    scanf(&quot;%99s&quot;, str);
+
+    if(str[0] == &#x27;-&#x27;)
+    {
+        sign = -1;
+        i = 1;
+    }
+
+    while(str[i] &gt;= &#x27;0&#x27; &amp;&amp; str[i] &lt;= &#x27;9&#x27;)
+    {
+        num = num * 10 + (str[i] - &#x27;0&#x27;);
+        i++;
+    }
+
+    if(str[i] == &#x27;.&#x27;)
+    {
+        i++;
+
+        while(str[i] &gt;= &#x27;0&#x27; &amp;&amp; str[i] &lt;= &#x27;9&#x27;)
+        {
+            num = num + (str[i] - &#x27;0&#x27;) * place;
+            place = place / 10;
+            i++;
+        }
+    }
+
+    num = num * sign;
+
+    printf(&quot;Float value = %.2f&quot;, num);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a number: 12.5
+Float value = 12.50
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

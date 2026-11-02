@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recursion</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q1. Calculate factorial of a number using recursion</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int factorial(int n)
+{
+    if (n == 0 || n == 1)
+        return 1;
+    else
+        return n * factorial(n - 1);
+}
+
+int main()
+{
+    int n;
+    
+    printf(&quot;Enter a number: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt; 0)
+        printf(&quot;Factorial is not defined for negative numbers.&quot;);
+    else
+        printf(&quot;Factorial of %d = %d&quot;, n, factorial(n));
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a number: 9
+Factorial of 9 = 362880
+</pre></h3>
+  <a href="../recursion.html">Back to Topic</a>
+</body>
+</html>

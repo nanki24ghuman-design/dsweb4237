@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q8. Enter an array from user and find maximum and minimum value</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[5], i, min, max;
+    printf(&quot;Enter any five numbers: &quot;);
+    for(i=0; i&lt;5; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+    min = arr[0];
+    max = arr[0];
+    for(i=1; i&lt;5; i++)
+    {
+        if(arr[i] &lt; min)
+        {
+            min = arr[i];
+        }
+
+        if(arr[i] &gt; max)
+        {
+            max = arr[i];
+        }
+    }
+    printf(&quot;Minimum number = %d\n&quot;, min);
+    printf(&quot;Maximum number = %d&quot;, max);
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter any five numbers: 9
+8
+7
+10
+7
+Minimum number = 7
+Maximum number = 10
+</pre></h3>
+  <a href="../arrays.html">Back to Topic</a>
+</body>
+</html>

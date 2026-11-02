@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stacks</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q10. Enter the infix expression from user and convert into postfix expression.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+
+char stack[50];
+int top = -1;
+
+void push(char ch)
+{
+    top++;
+    stack[top] = ch;
+}
+
+char pop()
+{
+    char ch = stack[top];
+    top--;
+    return ch;
+}
+
+int main()
+{
+    char infix[50], postfix[50], ch;
+    int i, j = 0;
+
+    printf(&quot;Enter infix expression: &quot;);
+    scanf(&quot;%s&quot;, infix);
+
+    for(i = 0; infix[i] != &#x27;\0&#x27;; i++)
+    {
+        ch = infix[i];
+
+        if(isalnum(ch))
+        {
+            postfix[j] = ch;
+            j++;
+        }
+        else if(ch == &#x27;(&#x27;)
+        {
+            push(ch);
+        }
+        else if(ch == &#x27;)&#x27;)
+        {
+            while(top != -1 &amp;&amp; stack[top] != &#x27;(&#x27;)
+            {
+                postfix[j] = pop();
+                j++;
+            }
+            pop();
+        }
+        else
+        {
+            while(top != -1 &amp;&amp; stack[top] != &#x27;(&#x27; &amp;&amp;
+                  (stack[top] == &#x27;*&#x27; || stack[top] == &#x27;/&#x27; ||
+                  ch == &#x27;+&#x27; || ch == &#x27;-&#x27;))
+            {
+                postfix[j] = pop();
+                j++;
+            }
+            push(ch);
+        }
+    }
+
+    while(top != -1)
+    {
+        postfix[j] = pop();
+        j++;
+    }
+
+    postfix[j] = &#x27;\0&#x27;;
+
+    printf(&quot;Postfix expression: %s&quot;, postfix);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>-
+Enter infix expression: A+B*C
+Postfix expression: ABC*+
+</pre></h3>
+  <a href="../stacks.html">Back to Topic</a>
+</body>
+</html>

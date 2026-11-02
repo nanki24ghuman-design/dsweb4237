@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trees</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q17. Create strictly binary tree from the given input by the user (dynamically)</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Node {
+    int data;
+    struct Node *left, *right;
+};
+
+struct Node* createTree() {
+    int value;
+
+    printf(&quot;Enter node data (-1 for no node): &quot;);
+    scanf(&quot;%d&quot;, &amp;value);
+
+    if (value == -1)
+        return NULL;
+
+    struct Node* newNode =
+        (struct Node*)malloc(sizeof(struct Node));
+
+    newNode-&gt;data = value;
+
+    printf(&quot;Enter left child of %d\n&quot;, value);
+    newNode-&gt;left = createTree();
+
+    printf(&quot;Enter right child of %d\n&quot;, value);
+    newNode-&gt;right = createTree();
+
+    // A strictly binary tree node must have
+    // either two children or no children.
+    if ((newNode-&gt;left == NULL &amp;&amp;
+         newNode-&gt;right != NULL) ||
+        (newNode-&gt;left != NULL &amp;&amp;
+         newNode-&gt;right == NULL)) {
+        printf(&quot;Invalid input! Each node must have &quot;
+               &quot;either 0 or 2 children.\n&quot;);
+        exit(1);
+    }
+
+    return newNode;
+}
+
+void preorder(struct Node* root) {
+    if (root == NULL)
+        return;
+
+    printf(&quot;%d &quot;, root-&gt;data);
+    preorder(root-&gt;left);
+    preorder(root-&gt;right);
+}
+
+int main() {
+    struct Node* root;
+
+    printf(&quot;Create a Strictly Binary Tree\n&quot;);
+    root = createTree();
+
+    printf(&quot;Preorder traversal: &quot;);
+    preorder(root);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter node data (-1 for no node): 10 20 25 15 30 45 30
+Enter left child of 10
+Enter node data (-1 for no node): Enter left child of 20
+Enter node data (-1 for no node): Enter left child of 25
+Enter node data (-1 for no node): Enter left child of 15
+Enter node data (-1 for no node): Enter left child of 30
+Enter node data (-1 for no node): Enter left child of 45
+Enter node data (-1 for no node): Enter left child of 30
+</pre></h3>
+  <a href="../trees.html">Back to Topic</a>
+</body>
+</html>

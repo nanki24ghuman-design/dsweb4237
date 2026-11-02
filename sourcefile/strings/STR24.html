@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q24. Enter a sentence and replace a word with another word</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    char str[300], word[50], rep[50], result[500];
+    int i = 0, j, k, r = 0, match, first = 1;
+
+    printf(&quot;Enter a sentence: &quot;);
+    fgets(str, sizeof(str), stdin);
+
+    printf(&quot;Enter word to replace: &quot;);
+    scanf(&quot;%49s&quot;, word);
+
+    printf(&quot;Enter new word: &quot;);
+    scanf(&quot;%49s&quot;, rep);
+
+    while(str[i] != &#x27;\0&#x27; &amp;&amp; str[i] != &#x27;\n&#x27;)
+    {
+        while(str[i] == &#x27; &#x27;)
+        {
+            if(r &gt; 0 &amp;&amp; result[r - 1] != &#x27; &#x27;)
+                result[r++] = &#x27; &#x27;;
+            i++;
+        }
+
+        if(str[i] == &#x27;\0&#x27; || str[i] == &#x27;\n&#x27;)
+            break;
+
+        j = i;
+
+        while(str[i] != &#x27; &#x27; &amp;&amp; str[i] != &#x27;\0&#x27; &amp;&amp; str[i] != &#x27;\n&#x27;)
+            i++;
+
+        match = 1;
+
+        if(i - j != strlen(word))
+            match = 0;
+        else
+        {
+            for(k = 0; word[k] != &#x27;\0&#x27;; k++)
+            {
+                if(str[j + k] != word[k])
+                {
+                    match = 0;
+                    break;
+                }
+            }
+        }
+
+        if(!first &amp;&amp; r &gt; 0 &amp;&amp; result[r - 1] != &#x27; &#x27;)
+            result[r++] = &#x27; &#x27;;
+
+        if(match == 1)
+        {
+            for(k = 0; rep[k] != &#x27;\0&#x27;; k++)
+                result[r++] = rep[k];
+        }
+        else
+        {
+            for(k = j; k &lt; i; k++)
+                result[r++] = str[k];
+        }
+
+        first = 0;
+    }
+
+    result[r] = &#x27;\0&#x27;;
+
+    printf(&quot;New sentence: %s&quot;, result);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a sentence: We like C and we like Java
+Enter word to replace: like
+Enter new word: love
+New sentence: We love C and we love Java
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

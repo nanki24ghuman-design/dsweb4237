@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q14. Enter the string and print the difference of ASCII values of adjacent characters</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[100];
+    int i, len = 0, diff;
+
+    printf(&quot;Enter a string: &quot;);
+    fgets(str, sizeof(str), stdin);
+
+    while(str[len] != &#x27;\0&#x27; &amp;&amp; str[len] != &#x27;\n&#x27;)
+        len++;
+
+    for(i = 0; i &lt; len - 1; i++)
+    {
+        diff = str[i] - str[i + 1];
+
+        if(diff &lt; 0)
+            diff = -diff;
+
+        printf(&quot;%d\n&quot;, diff);
+    }
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a string: WXYZ
+1
+1
+1
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

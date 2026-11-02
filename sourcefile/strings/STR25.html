@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q25. Enter the string and eliminate spaces from both ends</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[100];
+    int start = 0, end = 0, i;
+
+    printf(&quot;Enter a string: &quot;);
+    fgets(str, sizeof(str), stdin);
+
+    while(str[end] != &#x27;\0&#x27; &amp;&amp; str[end] != &#x27;\n&#x27;)
+        end++;
+
+    end--;
+
+    while(str[start] == &#x27; &#x27;)
+        start++;
+
+    while(end &gt;= start &amp;&amp; str[end] == &#x27; &#x27;)
+        end--;
+
+    printf(&quot;Trimmed string: &quot;);
+
+    for(i = start; i &lt;= end; i++)
+        printf(&quot;%c&quot;, str[i]);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a string:    Data Structure
+Trimmed string: Data Structure
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

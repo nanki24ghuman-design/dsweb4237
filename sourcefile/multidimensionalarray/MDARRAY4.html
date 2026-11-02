@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Dimensional Array</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q4. Enter two matrices from user, multiply the matrices and display the answer</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+int main()
+{
+    int a[2][2],b[2][2],c[2][2],i,j,k;
+    printf(&quot;Enter elements of first matrix: &quot;);
+    for(i=0;i&lt;2;i++)
+    {
+        for(j=0;j&lt;2;j++)
+        {
+            scanf(&quot;%d&quot;,&amp;a[i][j]);
+        }
+    }
+    printf(&quot;Enter elements of second matrix: &quot;);
+    for(i=0;i&lt;2;i++)
+    {
+        for(j=0;j&lt;2;j++)
+        {
+            scanf(&quot;%d&quot;,&amp;b[i][j]);
+        }
+    }
+    for(i=0;i&lt;2;i++)
+    {
+        for(j=0;j&lt;2;j++)
+        {
+            c[i][j]=0;
+            for(k=0;k&lt;2;k++)
+            {
+                c[i][j]=c[i][j]+a[i][k]*b[k][j];
+            }
+        }
+    }
+    printf(&quot;Multiplication of matrices:\n&quot;);
+    for(i=0;i&lt;2;i++)
+    {
+        for(j=0;j&lt;2;j++)
+        {
+            printf(&quot;%d &quot;,c[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }
+    return 0;
+}
+  </h3></pre>
+   <h2>Output</h2>
+  <h3><pre>
+Enter elements of first matrix:
+1 2
+3 4
+
+Enter elements of second matrix:
+5 6
+7 8
+
+Multiplication of matrices:
+19 22
+43 50
+  </pre></h3>
+  
+  <a href="../multidimensionalarray.html">Back to Topic</a>
+</body>
+</html>

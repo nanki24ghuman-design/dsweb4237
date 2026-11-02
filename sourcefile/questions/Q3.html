@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions Given by Sir</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q3. Enter an array from the user and count the number of occurrences of each number.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a[100], visited[100] = {0};
+    int n, i, j, count;
+
+    printf(&quot;Enter the size of array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter the array elements: &quot;);
+
+    for(i = 0; i &lt; n; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;a[i]);
+    }
+
+    for(i = 0; i &lt; n; i++)
+    {
+        if(visited[i] == 1)
+        {
+            continue;
+        }
+
+        count = 1;
+
+        for(j = i + 1; j &lt; n; j++)
+        {
+            if(a[i] == a[j])
+            {
+                count++;
+                visited[j] = 1;
+            }
+        }
+
+        printf(&quot;%d occurs %d times\n&quot;, a[i], count);
+    }
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter the size of array: 6
+Enter the array elements: 5 3 5 5 3 6
+5 occurs 3 times
+3 occurs 2 times
+6 occurs 1 times
+</pre></h3>
+  <h2>Complexity</h2>
+  <h3><pre>Time Complexity:
+Best  : O(n)   (all numbers are same, the inner loop runs only once)
+Worst : O(n^2) (all numbers are different, nested loops)
+
+Space Complexity: O(n) (array a[] and visited[]).
+</pre></h3>
+  <a href="../questions.html">Back to Topic</a>
+</body>
+</html>

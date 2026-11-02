@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions Given by Sir</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q12. Implement a dynamic queue using malloc and linked list with enqueue, dequeue, search, display and exit operations.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *front = NULL;
+struct node *rear = NULL;
+
+void enqueue()
+{
+    struct node *temp;
+    int value;
+
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    if(temp == NULL)
+    {
+        printf(&quot;Memory is full&quot;);
+        return;
+    }
+
+    printf(&quot;Enter value: &quot;);
+    scanf(&quot;%d&quot;, &amp;value);
+
+    temp-&gt;data = value;
+    temp-&gt;next = NULL;
+
+    if(front == NULL)
+    {
+        front = temp;
+        rear = temp;
+    }
+    else
+    {
+        rear-&gt;next = temp;
+        rear = temp;
+    }
+
+    printf(&quot;Value inserted&quot;);
+}
+
+void dequeue()
+{
+    struct node *temp;
+
+    if(front == NULL)
+    {
+        printf(&quot;Queue is empty&quot;);
+    }
+    else
+    {
+        temp = front;
+        printf(&quot;Deleted value: %d&quot;, temp-&gt;data);
+
+        front = front-&gt;next;
+
+        if(front == NULL)
+        {
+            rear = NULL;
+        }
+
+        free(temp);
+    }
+}
+
+void search()
+{
+    struct node *temp;
+    int value, found = 0;
+
+    printf(&quot;Enter value to search: &quot;);
+    scanf(&quot;%d&quot;, &amp;value);
+
+    temp = front;
+
+    while(temp != NULL)
+    {
+        if(temp-&gt;data == value)
+        {
+            found = 1;
+            break;
+        }
+
+        temp = temp-&gt;next;
+    }
+
+    if(found == 1)
+    {
+        printf(&quot;Value found&quot;);
+    }
+    else
+    {
+        printf(&quot;Value not found&quot;);
+    }
+}
+
+void display()
+{
+    struct node *temp;
+
+    if(front == NULL)
+    {
+        printf(&quot;Queue is empty&quot;);
+    }
+    else
+    {
+        temp = front;
+
+        printf(&quot;Queue: &quot;);
+
+        while(temp != NULL)
+        {
+            printf(&quot;%d &quot;, temp-&gt;data);
+            temp = temp-&gt;next;
+        }
+    }
+}
+
+int main()
+{
+    int choice;
+
+    while(1)
+    {
+        printf(&quot;\n1. Enqueue\n2. Dequeue\n3. Search\n4. Display\n5. Exit\n&quot;);
+        printf(&quot;Enter choice: &quot;);
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        if(choice == 1)
+        {
+            enqueue();
+        }
+        else if(choice == 2)
+        {
+            dequeue();
+        }
+        else if(choice == 3)
+        {
+            search();
+        }
+        else if(choice == 4)
+        {
+            display();
+        }
+        else if(choice == 5)
+        {
+            break;
+        }
+        else
+        {
+            printf(&quot;Invalid choice&quot;);
+        }
+    }
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter choice: 1
+Enter value: 10
+Value inserted
+
+Enter choice: 1
+Enter value: 20
+Value inserted
+
+Enter choice: 4
+Queue: 10 20
+
+Enter choice: 3
+Enter value to search: 20
+Value found
+
+Enter choice: 2
+Deleted value: 10
+
+Enter choice: 5
+</pre></h3>
+  <h2>Complexity</h2>
+  <h3><pre>Time Complexity:
+Enqueue : O(1)  (rear pointer is kept)
+Dequeue : O(1)
+Search  : O(n)
+Display : O(n)
+
+Space Complexity: O(n)  (one node for each element).
+</pre></h3>
+  <a href="../questions.html">Back to Topic</a>
+</body>
+</html>

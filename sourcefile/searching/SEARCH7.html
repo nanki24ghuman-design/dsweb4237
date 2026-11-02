@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Searching Algorithms</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q7. Enter a integer array from the user, enter an integer value and perform binary search algorithm through recursion.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+int search(int a[], int low, int high, int value)
+{
+    int mid;
+
+    if(low &gt; high)
+        return -1;
+
+    mid = (low + high) / 2;
+
+    if(a[mid] == value)
+        return mid;
+    else if(value &gt; a[mid])
+        return search(a, mid + 1, high, value);
+    else
+        return search(a, low, mid - 1, value);
+}
+
+int main()
+{
+    int a[100], n, i, value, result;
+
+    printf(&quot;Enter size of array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter elements in ascending order:\n&quot;);
+    for(i = 0; i &lt; n; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;a[i]);
+    }
+
+    printf(&quot;Enter value to search: &quot;);
+    scanf(&quot;%d&quot;, &amp;value);
+
+    result = search(a, 0, n - 1, value);
+
+    if(result == -1)
+        printf(&quot;Value not found&quot;);
+    else
+        printf(&quot;Value found at position %d&quot;, result + 1);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>-
+Enter size of array: 5
+Enter elements in ascending order:
+10 20 30 40 50
+Enter value to search: 40
+Value found at position 4
+</pre></h3>
+  <a href="../searching.html">Back to Topic</a>
+</body>
+</html>

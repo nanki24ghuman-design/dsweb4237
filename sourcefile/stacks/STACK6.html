@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stacks</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q6. Create the program to match the single bracket using stacks.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+#define MAX 100
+
+char stack[MAX];
+int top = -1;
+
+int main()
+{
+    char expression[MAX];
+    int i;
+    int balanced = 1;
+
+    printf(&quot;Enter expression: &quot;);
+    scanf(&quot; %[^\n]&quot;, expression);
+
+    for (i = 0; expression[i] != &#x27;\0&#x27;; i++)
+    {
+        if (expression[i] == &#x27;(&#x27;)
+        {
+            top++;
+            stack[top] = &#x27;(&#x27;;
+        }
+        else if (expression[i] == &#x27;)&#x27;)
+        {
+            if (top == -1)
+            {
+                balanced = 0;
+                break;
+            }
+
+            top--;
+        }
+    }
+
+    if (top != -1)
+        balanced = 0;
+
+    if (balanced == 1)
+        printf(&quot;Brackets are Balanced\n&quot;);
+    else
+        printf(&quot;Brackets are Not Balanced\n&quot;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>-
+Enter expression: (a+b)*(c+d)
+Brackets are Balanced
+</pre></h3>
+  <a href="../stacks.html">Back to Topic</a>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q18. Find the local minima in the array? (An element in an array is a local minima if it less than the element after it, and the element before it)</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+int main()
+{
+    int arr[5],i;
+    printf(&quot;Enter any five numbers: &quot;);
+    for(i=0;i&lt;5;i++)
+    {
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+    printf(&quot;Local minima are: &quot;);
+    for(i=1;i&lt;4;i++)
+    {
+        if(arr[i]&lt;arr[i-1] &amp;&amp; arr[i]&lt;arr[i+1])
+        {
+            printf(&quot;%d &quot;,arr[i]);
+        }
+    }
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter any five numbers: 9 8 7 11 10 8
+Local minima are: 7
+</pre></h3>
+  <a href="../arrays.html">Back to Topic</a>
+</body>
+</html>

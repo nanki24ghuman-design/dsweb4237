@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q20. Enter the string and count characters, words, spaces and lines</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[1000];
+    int i, ch, len = 0, words = 0;
+    int spaces = 0, lines = 0, inword = 0;
+
+    printf(&quot;Enter text (# at start of a line to stop):\n&quot;);
+
+    while((ch = getchar()) != EOF &amp;&amp; len &lt; 999)
+    {
+        if(ch == &#x27;#&#x27; &amp;&amp; (len == 0 || str[len - 1] == &#x27;\n&#x27;))
+            break;
+
+        str[len++] = ch;
+    }
+
+    str[len] = &#x27;\0&#x27;;
+
+    for(i = 0; i &lt; len; i++)
+    {
+        if(str[i] == &#x27; &#x27;)
+            spaces++;
+
+        if(str[i] == &#x27;\n&#x27;)
+            lines++;
+
+        if(str[i] != &#x27; &#x27; &amp;&amp; str[i] != &#x27;\n&#x27; &amp;&amp; str[i] != &#x27;\t&#x27;)
+        {
+            if(inword == 0)
+                words++;
+
+            inword = 1;
+        }
+        else
+            inword = 0;
+    }
+
+    if(len &gt; 0 &amp;&amp; str[len - 1] != &#x27;\n&#x27;)
+        lines++;
+
+    printf(&quot;Characters = %d\n&quot;, len);
+    printf(&quot;Words = %d\n&quot;, words);
+    printf(&quot;Spaces = %d\n&quot;, spaces);
+    printf(&quot;Lines = %d\n&quot;, lines);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter text (# at start of a line to stop):
+Hello World
+C Language
+#
+Characters = 24
+Words = 4
+Spaces = 2
+Lines = 2
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

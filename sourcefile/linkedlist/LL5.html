@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linked List</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q5. Implement the operations of single linked list storing string values (insert at begin,insert at pos,insert at end,delete at begin,delete at end, delete at pos, isempty, isfull, display, search)</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+struct node
+{
+    char data[100];
+    struct node *next;
+};
+
+struct node *start = 0;
+
+int isempty()
+{
+    return start == 0;
+}
+
+int isfull()
+{
+    struct node *temp;
+
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    if (temp == 0)
+        return 1;
+
+    free(temp);
+    return 0;
+}
+
+void insertbeg()
+{
+    struct node *temp;
+
+    if (isfull())
+    {
+        printf(&quot;List is full\n&quot;);
+        return;
+    }
+
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    printf(&quot;Enter string: &quot;);
+    scanf(&quot; %s&quot;, temp-&gt;data);
+
+    temp-&gt;next = start;
+    start = temp;
+
+    printf(&quot;String inserted\n&quot;);
+}
+
+void insertend()
+{
+    struct node *temp, *p;
+
+    if (isfull())
+    {
+        printf(&quot;List is full\n&quot;);
+        return;
+    }
+
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    printf(&quot;Enter string: &quot;);
+    scanf(&quot; %s&quot;, temp-&gt;data);
+
+    temp-&gt;next = 0;
+
+    if (start == 0)
+        start = temp;
+    else
+    {
+        p = start;
+
+        while (p-&gt;next != 0)
+            p = p-&gt;next;
+
+        p-&gt;next = temp;
+    }
+
+    printf(&quot;String inserted\n&quot;);
+}
+
+void insertpos()
+{
+    struct node *temp, *p;
+    int pos, i;
+
+    printf(&quot;Enter position: &quot;);
+    scanf(&quot;%d&quot;, &amp;pos);
+
+    if (pos &lt; 1)
+    {
+        printf(&quot;Invalid position\n&quot;);
+        return;
+    }
+
+    if (pos == 1)
+    {
+        insertbeg();
+        return;
+    }
+
+    p = start;
+
+    for (i = 1; i &lt; pos - 1 &amp;&amp; p != 0; i++)
+        p = p-&gt;next;
+
+    if (p == 0)
+    {
+        printf(&quot;Invalid position\n&quot;);
+        return;
+    }
+
+    if (isfull())
+    {
+        printf(&quot;List is full\n&quot;);
+        return;
+    }
+
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    printf(&quot;Enter string: &quot;);
+    scanf(&quot; %s&quot; , temp-&gt;data);
+
+    temp-&gt;next = p-&gt;next;
+    p-&gt;next = temp;
+
+    printf(&quot;String inserted\n&quot;);
+}
+
+void deletebeg()
+{
+    struct node *temp;
+
+    if (isempty())
+    {
+        printf(&quot;List is empty\n&quot;);
+        return;
+    }
+
+    temp = start;
+    start = start-&gt;next;
+
+    free(temp);
+
+    printf(&quot;String deleted\n&quot;);
+}
+
+void deleteend()
+{
+    struct node *p, *temp;
+
+    if (isempty())
+    {
+        printf(&quot;List is empty\n&quot;);
+        return;
+    }
+
+    if (start-&gt;next == 0)
+    {
+        free(start);
+        start = 0;
+    }
+    else
+    {
+        p = start;
+
+        while (p-&gt;next-&gt;next != 0)
+            p = p-&gt;next;
+
+        temp = p-&gt;next;
+        p-&gt;next = 0;
+
+        free(temp);
+    }
+
+    printf(&quot;String deleted\n&quot;);
+}
+
+void deletepos()
+{
+    struct node *p, *temp;
+    int pos, i;
+
+    printf(&quot;Enter position: &quot;);
+    scanf(&quot;%d&quot;, &amp;pos);
+
+    if (isempty() || pos &lt; 1)
+    {
+        printf(&quot;Invalid position or empty list\n&quot;);
+        return;
+    }
+
+    if (pos == 1)
+    {
+        deletebeg();
+        return;
+    }
+
+    p = start;
+
+    for (i = 1; i &lt; pos - 1 &amp;&amp; p != 0; i++)
+        p = p-&gt;next;
+
+    if (p == 0 || p-&gt;next == 0)
+    {
+        printf(&quot;Invalid position\n&quot;);
+        return;
+    }
+
+    temp = p-&gt;next;
+    p-&gt;next = temp-&gt;next;
+
+    free(temp);
+
+    printf(&quot;String deleted\n&quot;);
+}
+
+void display()
+{
+    struct node *p = start;
+
+    if (isempty())
+    {
+        printf(&quot;List is empty\n&quot;);
+        return;
+    }
+
+    printf(&quot;Linked List: &quot;);
+
+    while (p != 0)
+    {
+        printf(&quot;%s -&gt; &quot;, p-&gt;data);
+        p = p-&gt;next;
+    }
+
+    printf(&quot;0\n&quot;);
+}
+
+void search()
+{
+    struct node *p = start;
+    char key[100];
+    int pos = 1;
+
+    printf(&quot;Enter string to search: &quot;);
+    scanf(&quot; %99[^\n]&quot;, key);
+
+    while (p != 0)
+    {
+        if (strcmp(p-&gt;data, key) == 0)
+        {
+            printf(&quot;String found at position %d\n&quot;, pos);
+            return;
+        }
+
+        p = p-&gt;next;
+        pos++;
+    }
+
+    printf(&quot;String not found\n&quot;);
+}
+
+int main()
+{
+    int ch;
+
+    while (1)
+    {
+        printf(&quot;\n--- SINGLY LINKED LIST OF STRINGS ---\n&quot;);
+        printf(&quot;1. Insert at Beginning\n&quot;);
+        printf(&quot;2. Insert at Position\n&quot;);
+        printf(&quot;3. Insert at End\n&quot;);
+        printf(&quot;4. Delete at Beginning\n&quot;);
+        printf(&quot;5. Delete at End\n&quot;);
+        printf(&quot;6. Delete at Position\n&quot;);
+        printf(&quot;7. IsEmpty\n&quot;);
+        printf(&quot;8. IsFull\n&quot;);
+        printf(&quot;9. Display\n&quot;);
+        printf(&quot;10. Search\n&quot;);
+        printf(&quot;11. Exit\n&quot;);
+
+        printf(&quot;Enter choice: &quot;);
+        scanf(&quot;%d&quot;, &amp;ch);
+
+        switch (ch)
+        {
+            case 1: insertbeg(); break;
+            case 2: insertpos(); break;
+            case 3: insertend(); break;
+            case 4: deletebeg(); break;
+            case 5: deleteend(); break;
+            case 6: deletepos(); break;
+
+            case 7:
+                if (isempty())
+                    printf(&quot;List is empty\n&quot;);
+                else
+                    printf(&quot;List is not empty\n&quot;);
+                break;
+
+            case 8:
+                if (isfull())
+                    printf(&quot;List is full\n&quot;);
+                else
+                    printf(&quot;Memory is available\n&quot;);
+                break;
+
+            case 9: display(); break;
+            case 10: search(); break;
+            case 11: return 0;
+
+            default: printf(&quot;Invalid choice\n&quot;);
+        }
+    }
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>--- SINGLY LINKED LIST OF STRINGS ---
+1. Insert at Beginning
+2. Insert at Position
+3. Insert at End
+4. Delete at Beginning
+5. Delete at End
+6. Delete at Position
+7. IsEmpty
+8. IsFull
+9. Display
+10. Search
+11. Exit
+
+Enter choice: 1
+Enter string: Apple
+String inserted
+
+Enter choice: 3
+Enter string: Mango
+String inserted
+
+Enter choice: 3
+Enter string: Orange
+String inserted
+
+Enter choice: 9
+Linked List: Apple -&gt; Mango -&gt; Orange -&gt; 0
+
+Enter choice: 2
+Enter position: 2
+Enter string: Banana
+String inserted
+
+Enter choice: 9
+Linked List: Apple -&gt; Banana -&gt; Mango -&gt; Orange -&gt; 0
+
+Enter choice: 10
+Enter string to search: Mango
+String found at position 3
+
+Enter choice: 6
+Enter position: 2
+String deleted
+
+Enter choice: 9
+Linked List: Apple -&gt; Mango -&gt; Orange -&gt; 0
+
+Enter choice: 11
+</pre></h3>
+  <a href="../linkedlist.html">Back to Topic</a>
+</body>
+</html>

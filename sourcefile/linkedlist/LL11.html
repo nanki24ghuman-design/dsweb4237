@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linked List</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q11. Enter the 2 polynomial equations dynamically, multiply them and display the answer.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+struct poly
+{
+    int coeff;
+    int exp;
+};
+
+int main()
+{
+    struct poly a[20], b[20], c[40];
+    int n, m, i, j, k = 0;
+
+    printf(&quot;Enter terms in first polynomial: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for(i = 0; i &lt; n; i++)
+    {
+        printf(&quot;Enter coefficient and exponent: &quot;);
+        scanf(&quot;%d%d&quot;, &amp;a[i].coeff, &amp;a[i].exp);
+    }
+
+    printf(&quot;Enter terms in second polynomial: &quot;);
+    scanf(&quot;%d&quot;, &amp;m);
+
+    for(i = 0; i &lt; m; i++)
+    {
+        printf(&quot;Enter coefficient and exponent: &quot;);
+        scanf(&quot;%d%d&quot;, &amp;b[i].coeff, &amp;b[i].exp);
+    }
+
+    i = 0;
+    j = 0;
+
+    while(i &lt; n &amp;&amp; j &lt; m)
+    {
+        if(a[i].exp == b[j].exp)
+        {
+            c[k].coeff = a[i].coeff - b[j].coeff;
+            c[k].exp = a[i].exp;
+            i++;
+            j++;
+            k++;
+        }
+        else if(a[i].exp &gt; b[j].exp)
+        {
+            c[k++] = a[i++];
+        }
+        else
+        {
+            c[k] = b[j];
+            c[k].coeff = -b[j].coeff;
+            j++;
+            k++;
+        }
+    }
+
+    while(i &lt; n)
+        c[k++] = a[i++];
+
+    while(j &lt; m)
+    {
+        c[k] = b[j];
+        c[k].coeff = -b[j].coeff;
+        j++;
+        k++;
+    }
+
+    printf(&quot;Difference = &quot;);
+
+    for(i = 0; i &lt; k; i++)
+    {
+        if(c[i].coeff != 0)
+        {
+            if(i &gt; 0 &amp;&amp; c[i].coeff &gt; 0)
+                printf(&quot;+ &quot;);
+
+            printf(&quot;%dx^%d &quot;, c[i].coeff, c[i].exp);
+        }
+    }
+
+    printf(&quot;\n&quot;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter terms in first polynomial: 3
+Enter coefficient and exponent: 3 2
+Enter coefficient and exponent: 2 1
+Enter coefficient and exponent: 5 0
+
+Enter terms in second polynomial: 3
+Enter coefficient and exponent: 1 2
+Enter coefficient and exponent: 4 1
+Enter coefficient and exponent: 2 0
+
+Difference = 2x^2 -2x^1 + 3x^0
+</pre></h3>
+  <a href="../linkedlist.html">Back to Topic</a>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stacks</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q7. Create two integer stacks in a single array.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+#define MAX 10
+
+int stack[MAX];
+int top1 = -1;
+int top2 = MAX;
+
+void push1(int value)
+{
+    if (top1 + 1 == top2)
+        printf(&quot;Stack is Full\n&quot;);
+    else
+    {
+        top1++;
+        stack[top1] = value;
+        printf(&quot;%d pushed into Stack 1\n&quot;, value);
+    }
+}
+
+void push2(int value)
+{
+    if (top1 + 1 == top2)
+        printf(&quot;Stack is Full\n&quot;);
+    else
+    {
+        top2--;
+        stack[top2] = value;
+        printf(&quot;%d pushed into Stack 2\n&quot;, value);
+    }
+}
+
+void pop1()
+{
+    if (top1 == -1)
+        printf(&quot;Stack 1 is Empty\n&quot;);
+    else
+    {
+        printf(&quot;%d popped from Stack 1\n&quot;, stack[top1]);
+        top1--;
+    }
+}
+
+void pop2()
+{
+    if (top2 == MAX)
+        printf(&quot;Stack 2 is Empty\n&quot;);
+    else
+    {
+        printf(&quot;%d popped from Stack 2\n&quot;, stack[top2]);
+        top2++;
+    }
+}
+
+int main()
+{
+    int n, i, value;
+
+    printf(&quot;Enter number of elements for Stack 1: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter elements for Stack 1:\n&quot;);
+
+    for (i = 0; i &lt; n; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;value);
+        push1(value);
+    }
+
+    printf(&quot;\nEnter number of elements for Stack 2: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter elements for Stack 2:\n&quot;);
+
+    for (i = 0; i &lt; n; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;value);
+        push2(value);
+    }
+
+    printf(&quot;\n&quot;);
+
+    pop1();
+    pop2();
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>-
+Enter number of elements for Stack 1: 2
+Enter elements for Stack 1:
+10
+20
+10 pushed into Stack 1
+20 pushed into Stack 1
+
+Enter number of elements for Stack 2: 2
+Enter elements for Stack 2:
+30
+40
+30 pushed into Stack 2
+40 pushed into Stack 2
+
+20 popped from Stack 1
+40 popped from Stack 2
+</pre></h3>
+  <a href="../stacks.html">Back to Topic</a>
+</body>
+</html>

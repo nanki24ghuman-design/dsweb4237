@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions Given by Sir</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q11. Implement a circular queue using global variables.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int queue[5];
+int front = -1, rear = -1;
+
+void enqueue()
+{
+    int value;
+
+    if((rear + 1) % 5 == front)
+    {
+        printf(&quot;Queue is full&quot;);
+    }
+    else
+    {
+        printf(&quot;Enter value: &quot;);
+        scanf(&quot;%d&quot;, &amp;value);
+
+        if(front == -1)
+        {
+            front = 0;
+            rear = 0;
+        }
+        else
+        {
+            rear = (rear + 1) % 5;
+        }
+
+        queue[rear] = value;
+        printf(&quot;Value inserted&quot;);
+    }
+}
+
+void dequeue()
+{
+    if(front == -1)
+    {
+        printf(&quot;Queue is empty&quot;);
+    }
+    else
+    {
+        printf(&quot;Deleted value: %d&quot;, queue[front]);
+
+        if(front == rear)
+        {
+            front = -1;
+            rear = -1;
+        }
+        else
+        {
+            front = (front + 1) % 5;
+        }
+    }
+}
+
+void display()
+{
+    int i;
+
+    if(front == -1)
+    {
+        printf(&quot;Queue is empty&quot;);
+    }
+    else
+    {
+        printf(&quot;Queue: &quot;);
+        i = front;
+
+        while(1)
+        {
+            printf(&quot;%d &quot;, queue[i]);
+
+            if(i == rear)
+            {
+                break;
+            }
+
+            i = (i + 1) % 5;
+        }
+    }
+}
+
+int main()
+{
+    int choice;
+
+    while(1)
+    {
+        printf(&quot;\n1. Enqueue\n2. Dequeue\n3. Display\n4. Exit\n&quot;);
+        printf(&quot;Enter choice: &quot;);
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        if(choice == 1)
+        {
+            enqueue();
+        }
+        else if(choice == 2)
+        {
+            dequeue();
+        }
+        else if(choice == 3)
+        {
+            display();
+        }
+        else if(choice == 4)
+        {
+            break;
+        }
+        else
+        {
+            printf(&quot;Invalid choice&quot;);
+        }
+    }
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter choice: 1
+Enter value: 10
+Value inserted
+
+Enter choice: 1
+Enter value: 20
+Value inserted
+
+Enter choice: 3
+Queue: 10 20
+
+Enter choice: 2
+Deleted value: 10
+
+Enter choice: 4
+</pre></h3>
+  <h2>Complexity</h2>
+  <h3><pre>Time Complexity:
+Enqueue : O(1)
+Dequeue : O(1)
+Display : O(n)
+
+Space Complexity: O(n) for the queue array.
+(the circular queue can reuse empty places, so no space is wasted)
+</pre></h3>
+  <a href="../questions.html">Back to Topic</a>
+</body>
+</html>

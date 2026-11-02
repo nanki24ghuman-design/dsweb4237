@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions Given by Sir</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q19. Subtract two polynomial equations using a linked list.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct node
+{
+    int coeff;
+    int power;
+    struct node *next;
+};
+
+struct node *insertend(struct node *start, int c, int p)
+{
+    struct node *temp, *ptr;
+
+    temp = (struct node *)malloc(sizeof(struct node));
+    temp-&gt;coeff = c;
+    temp-&gt;power = p;
+    temp-&gt;next = NULL;
+
+    if(start == NULL)
+        return temp;
+
+    ptr = start;
+
+    while(ptr-&gt;next != NULL)
+        ptr = ptr-&gt;next;
+
+    ptr-&gt;next = temp;
+
+    return start;
+}
+
+void display(struct node *start)
+{
+    struct node *ptr = start;
+
+    while(ptr != NULL)
+    {
+        printf(&quot;%dx^%d&quot;, ptr-&gt;coeff, ptr-&gt;power);
+
+        if(ptr-&gt;next != NULL)
+            printf(&quot; + &quot;);
+
+        ptr = ptr-&gt;next;
+    }
+
+    printf(&quot;\n&quot;);
+}
+
+int main()
+{
+    struct node *p1 = NULL, *p2 = NULL, *result = NULL;
+    struct node *a, *b;
+    int n, i, c, p, diff;
+
+    printf(&quot;Enter number of terms in first polynomial: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for(i = 1; i &lt;= n; i++)
+    {
+        printf(&quot;Enter coefficient and power: &quot;);
+        scanf(&quot;%d%d&quot;, &amp;c, &amp;p);
+        p1 = insertend(p1, c, p);
+    }
+
+    printf(&quot;Enter number of terms in second polynomial: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for(i = 1; i &lt;= n; i++)
+    {
+        printf(&quot;Enter coefficient and power: &quot;);
+        scanf(&quot;%d%d&quot;, &amp;c, &amp;p);
+        p2 = insertend(p2, c, p);
+    }
+
+    a = p1;
+    b = p2;
+
+    while(a != NULL &amp;&amp; b != NULL)
+    {
+        if(a-&gt;power == b-&gt;power)
+        {
+            diff = a-&gt;coeff - b-&gt;coeff;
+
+            if(diff != 0)
+                result = insertend(result, diff, a-&gt;power);
+
+            a = a-&gt;next;
+            b = b-&gt;next;
+        }
+        else if(a-&gt;power &gt; b-&gt;power)
+        {
+            result = insertend(result, a-&gt;coeff, a-&gt;power);
+            a = a-&gt;next;
+        }
+        else
+        {
+            result = insertend(result, -b-&gt;coeff, b-&gt;power);
+            b = b-&gt;next;
+        }
+    }
+
+    while(a != NULL)
+    {
+        result = insertend(result, a-&gt;coeff, a-&gt;power);
+        a = a-&gt;next;
+    }
+
+    while(b != NULL)
+    {
+        result = insertend(result, -b-&gt;coeff, b-&gt;power);
+        b = b-&gt;next;
+    }
+
+    printf(&quot;First polynomial: &quot;);
+    display(p1);
+
+    printf(&quot;Second polynomial: &quot;);
+    display(p2);
+
+    printf(&quot;Difference of polynomials: &quot;);
+    display(result);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter number of terms in first polynomial: 3
+Enter coefficient and power: 9 2
+Enter coefficient and power: 8 1
+Enter coefficient and power: 10 0
+Enter number of terms in second polynomial: 3
+Enter coefficient and power: 6 2
+Enter coefficient and power: 7 1
+Enter coefficient and power: 5 0
+First polynomial: 9x^2 + 8x^1 + 10x^0
+Second polynomial: 6x^2 + 7x^1 + 5x^0
+Difference of polynomials: 3x^2 + 1x^1 + 5x^0
+</pre></h3>
+  <h2>Complexity</h2>
+  <h3><pre>Let m = terms in first polynomial, n = terms in second polynomial.
+
+Time Complexity:
+insertend()  : O(k)  (k = current length of the list)
+Building both polynomials : O(m^2 + n^2)
+Subtracting and building result: O((m+n)^2)
+Overall      : O((m+n)^2)
+
+Space Complexity: O(m+n)  (result has at most m+n terms).
+</pre></h3>
+  <a href="../questions.html">Back to Topic</a>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Algorithms</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q19. Enter a string array from the user and perform quick sort algorithm through iteration. also calculate the worst and best complexity with exact time.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+// Function to arrange strings around the pivot
+int partition(char a[][50], int low, int high, int *comparisons)
+{
+    char pivot[50], temp[50];
+    int i = low - 1, j;
+
+    strcpy(pivot, a[high]);
+
+    for (j = low; j &lt; high; j++)
+    {
+        (*comparisons)++;
+
+        if (strcmp(a[j], pivot) &lt; 0)
+        {
+            i++;
+
+            strcpy(temp, a[i]);
+            strcpy(a[i], a[j]);
+            strcpy(a[j], temp);
+        }
+    }
+
+    // Place the pivot in its correct position
+    strcpy(temp, a[i + 1]);
+    strcpy(a[i + 1], a[high]);
+    strcpy(a[high], temp);
+
+    return i + 1;
+}
+
+// Function to perform quick sort using iteration
+int quickSort(char a[][50], int n)
+{
+    int stack[200];
+    int top = -1;
+    int low, high, pivot;
+    int comparisons = 0;
+
+    if (n &lt;= 1)
+        return 0;
+
+    // Store the starting and ending indexes
+    stack[++top] = 0;
+    stack[++top] = n - 1;
+
+    while (top &gt;= 0)
+    {
+        high = stack[top--];
+        low = stack[top--];
+
+        if (low &lt; high)
+        {
+            pivot = partition(a, low, high, &amp;comparisons);
+
+            // Store the left part
+            if (pivot - 1 &gt; low)
+            {
+                stack[++top] = low;
+                stack[++top] = pivot - 1;
+            }
+
+            // Store the right part
+            if (pivot + 1 &lt; high)
+            {
+                stack[++top] = pivot + 1;
+                stack[++top] = high;
+            }
+        }
+    }
+
+    return comparisons;
+}
+
+int main()
+{
+    char a[100][50];
+    int n, i, comparisons;
+
+    printf(&quot;Enter the number of strings: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt; 1 || n &gt; 100)
+    {
+        printf(&quot;Please enter between 1 and 100 strings.&quot;);
+        return 0;
+    }
+
+    printf(&quot;Enter strings:\n&quot;);
+
+    for (i = 0; i &lt; n; i++)
+    {
+        scanf(&quot;%49s&quot;, a[i]);
+    }
+
+    comparisons = quickSort(a, n);
+
+    printf(&quot;\nSorted strings:\n&quot;);
+
+    for (i = 0; i &lt; n; i++)
+    {
+        printf(&quot;%s\n&quot;, a[i]);
+    }
+
+    printf(&quot;\nTotal comparisons = %d&quot;, comparisons);
+    printf(&quot;\nBest Case Time Complexity = O(n log n)&quot;);
+    printf(&quot;\nWorst Case Time Complexity = O(n^2)&quot;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter the number of strings: 5
+Enter strings:
+Dog
+Cat
+Apple
+Ball
+Book
+
+Sorted strings:
+Apple
+Ball
+Book
+Cat
+Dog
+
+Total comparisons = 9
+Best Case Time Complexity = O(n log n)
+Worst Case Time Complexity = O(n^2)
+</pre></h3>
+  <a href="../sorting.html">Back to Topic</a>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stacks</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q13. Implement the tower of hanoi using stacks.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+void hanoi(int n, char source, char destination, char auxiliary)
+{
+    if(n == 1)
+    {
+        printf(&quot;Move disk 1 from %c to %c\n&quot;, source, destination);
+        return;
+    }
+
+    hanoi(n - 1, source, auxiliary, destination);
+
+    printf(&quot;Move disk %d from %c to %c\n&quot;, n, source, destination);
+
+    hanoi(n - 1, auxiliary, destination, source);
+}
+
+int main()
+{
+    int n, i;
+
+    printf(&quot;Enter number of disks: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Moves:\n&quot;);
+
+    hanoi(n, &#x27;A&#x27;, &#x27;C&#x27;, &#x27;B&#x27;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>-
+Enter number of disks: 2
+Moves:
+Move disk 1 from A to B
+Move disk 2 from A to C
+Move disk 1 from B to C
+</pre></h3>
+  <a href="../stacks.html">Back to Topic</a>
+</body>
+</html>

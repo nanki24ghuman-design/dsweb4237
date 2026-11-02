@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Searching Algorithms</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q8. Enter a string from the user, enter a character and perform binary search algorithm through iteration.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[100], ch;
+    int low, high, mid, i, found = 0;
+
+    printf(&quot;Enter a sorted string: &quot;);
+    scanf(&quot;%s&quot;, str);
+
+    printf(&quot;Enter character to search: &quot;);
+    scanf(&quot; %c&quot;, &amp;ch);
+
+    i = 0;
+    while(str[i] != &#x27;\0&#x27;)
+    {
+        i++;
+    }
+
+    low = 0;
+    high = i - 1;
+
+    while(low &lt;= high)
+    {
+        mid = (low + high) / 2;
+
+        if(str[mid] == ch)
+        {
+            printf(&quot;Character found at position %d&quot;, mid + 1);
+            found = 1;
+            break;
+        }
+        else if(ch &gt; str[mid])
+        {
+            low = mid + 1;
+        }
+        else
+        {
+            high = mid - 1;
+        }
+    }
+
+    if(found == 0)
+    {
+        printf(&quot;Character not found&quot;);
+    }
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>-
+Enter a sorted string: acdjk
+Enter character to search: j
+Character found at position 4
+</pre></h3>
+  <a href="../searching.html">Back to Topic</a>
+</body>
+</html>

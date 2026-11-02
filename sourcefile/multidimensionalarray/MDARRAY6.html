@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Dimensional Array</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q6. Enter a matrix from user, multiply it with a scalar value and display the answer</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+int main()
+{
+    int a[2][2],i,j,n;
+    printf(&quot;Enter four elements of matrix: &quot;);
+    for(i=0;i&lt;2;i++)
+    {
+        for(j=0;j&lt;2;j++)
+        {
+            scanf(&quot;%d&quot;,&amp;a[i][j]);
+        }
+    }
+    printf(&quot;Enter scalar value: &quot;);
+    scanf(&quot;%d&quot;,&amp;n);
+    for(i=0;i&lt;2;i++)
+    {
+        for(j=0;j&lt;2;j++)
+        {
+            a[i][j]=a[i][j]*n;
+        }
+    }
+    printf(&quot;Resultant matrix:\n&quot;);
+    for(i=0;i&lt;2;i++)
+    {
+        for(j=0;j&lt;2;j++)
+        {
+            printf(&quot;%d &quot;,a[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter four elements of matrix: 8 9 7 6
+Enter scalar value: 7
+Resultant matrix:
+56 63
+49 42
+</pre></h3>
+  <a href="../multidimensionalarray.html">Back to Topic</a>
+</body>
+</html>

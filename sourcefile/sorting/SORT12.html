@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Algorithms</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q12. Enter a string array from the user and perform selection sort algorithm through recursion. also calculate the worst and best complexity with exact time.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+// Function to perform selection sort using recursion
+int selectionSort(char a[][50], int n, int index)
+{
+    int j, min;
+    char temp[50];
+    int comparisons = 0;
+
+    if (index == n - 1)
+        return 0;
+
+    min = index;
+
+    // Find the alphabetically smallest string
+    for (j = index + 1; j &lt; n; j++)
+    {
+        comparisons++;
+
+        if (strcmp(a[j], a[min]) &lt; 0)
+        {
+            min = j;
+        }
+    }
+
+    // Swap the strings
+    strcpy(temp, a[index]);
+    strcpy(a[index], a[min]);
+    strcpy(a[min], temp);
+
+    // Sort the remaining strings recursively
+    return comparisons + selectionSort(a, n, index + 1);
+}
+
+int main()
+{
+    char a[100][50];
+    int n, i, comparisons;
+
+    printf(&quot;Enter the number of strings: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter strings:\n&quot;);
+
+    for (i = 0; i &lt; n; i++)
+    {
+        scanf(&quot;%49s&quot;, a[i]);
+    }
+
+    comparisons = selectionSort(a, n, 0);
+
+    printf(&quot;\nSorted strings:\n&quot;);
+
+    for (i = 0; i &lt; n; i++)
+    {
+        printf(&quot;%s\n&quot;, a[i]);
+    }
+
+    printf(&quot;\nTotal comparisons = %d&quot;, comparisons);
+    printf(&quot;\nBest Case Time Complexity = O(n^2)&quot;);
+    printf(&quot;\nWorst Case Time Complexity = O(n^2)&quot;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter the number of strings: 5
+Enter strings:
+Pear
+Lemon
+Cherry
+Papaya
+Guava
+
+Sorted strings:
+Cherry
+Guava
+Lemon
+Papaya
+Pear
+
+Total comparisons = 10
+Best Case Time Complexity = O(n^2)
+Worst Case Time Complexity = O(n^2)
+</pre></h3>
+  <a href="../sorting.html">Back to Topic</a>
+</body>
+</html>

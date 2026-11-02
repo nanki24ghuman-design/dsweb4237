@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q10. Enter the string, enter the index and print the character at that index</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[100];
+    int i = 0, index;
+
+    printf(&quot;Enter a string: &quot;);
+    fgets(str, sizeof(str), stdin);
+
+    while(str[i] != &#x27;\0&#x27; &amp;&amp; str[i] != &#x27;\n&#x27;)
+        i++;
+
+    printf(&quot;Enter index number: &quot;);
+    scanf(&quot;%d&quot;, &amp;index);
+
+    if(index &gt;= 0 &amp;&amp; index &lt; i)
+        printf(&quot;Character = %c&quot;, str[index]);
+    else
+        printf(&quot;Invalid index&quot;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a string: Pointer
+Enter index number: 2
+Character = i
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

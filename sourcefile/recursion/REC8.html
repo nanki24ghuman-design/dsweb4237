@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recursion</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q8. Find the arithmetic mean of an integer array using recursion.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int sumArray(int arr[], int n)
+{
+    if (n == 0)
+        return 0;
+
+    return arr[n - 1] + sumArray(arr, n - 1);
+}
+
+int main()
+{
+    int n, i, arr[100];
+    float mean;
+
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; 100)
+        return 0;
+
+    for (i = 0; i &lt; n; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    mean = (float)sumArray(arr, n) / n;
+
+    printf(&quot;%.2f\n&quot;, mean);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>7
+10
+20
+30
+40
+50
+10
+60
+31.43
+</pre></h3>
+  <a href="../recursion.html">Back to Topic</a>
+</body>
+</html>

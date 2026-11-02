@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q3. Enter an array from user and copy the array into second array</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+int main()
+{
+    int ar1[15], ar2[15],n, i;
+    printf("Enter the size of array : ");
+    scanf("%d",&n);
+    printf(&quot;Enter the elements of first array:\n&quot;);
+    for(i=0; i&lt;n; i++)
+    {
+        scanf(&quot;%d&quot;,&amp;ar1[i]);
+    }
+    for(i=0; i&lt;n; i++)
+    {
+        ar2[i]=ar1[i];
+    }
+    printf(&quot;The elements of second array are:\n&quot;);
+    for(i=0; i&lt;n; i++)
+    {
+        printf(&quot;%d &quot;,ar2[i]);
+    }
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>
+Enter the size of array :4
+Enter the elements of first array: 2 5 6 7 
+The elements of second array are:  2 5 6 7 
+</pre></h3>
+  <a href="../arrays.html">Back to Topic</a>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Dimensional Array</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q1. Enter a matrix of 4 rows and 2 columns from the user and display it in matrix format</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+int main()
+{
+    int arr[4][2],i,j;
+    printf(&quot;Enter 8 elements: &quot;);
+    for(i=0;i&lt;4;i++)
+    {
+        for(j=0;j&lt;2;j++)
+        {
+            scanf(&quot;%d&quot;,&amp;arr[i][j]);
+        }
+    }
+    printf(&quot;Matrix is:\n&quot;);
+    for(i=0;i&lt;4;i++)
+    {
+        for(j=0;j&lt;2;j++)
+        {
+            printf(&quot;%d &quot;,arr[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter 8 elements: 5 6 8 9 10 11 12 13
+Matrix is:
+5  6
+8  9
+10 11
+12 13
+</pre></h3>
+  <a href="../multidimensionalarray.html">Back to Topic</a>
+</body>
+</html>

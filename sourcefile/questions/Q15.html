@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions Given by Sir</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q15. Write a C program for a doubly linked list with insertion at beginning, end and position, deletion at beginning, end and position, searching, sorting and displaying.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct node
+{
+    int data;
+    struct node *prev;
+    struct node *next;
+};
+
+struct node *start = NULL;
+
+void insertbegin()
+{
+    struct node *temp;
+
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    if(temp == NULL)
+    {
+        printf(&quot;Memory is full&quot;);
+        return;
+    }
+
+    printf(&quot;Enter value: &quot;);
+    scanf(&quot;%d&quot;, &amp;temp-&gt;data);
+
+    temp-&gt;prev = NULL;
+    temp-&gt;next = start;
+
+    if(start != NULL)
+    {
+        start-&gt;prev = temp;
+    }
+
+    start = temp;
+}
+
+void insertend()
+{
+    struct node *temp, *p;
+
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    if(temp == NULL)
+    {
+        printf(&quot;Memory is full&quot;);
+        return;
+    }
+
+    printf(&quot;Enter value: &quot;);
+    scanf(&quot;%d&quot;, &amp;temp-&gt;data);
+
+    temp-&gt;next = NULL;
+
+    if(start == NULL)
+    {
+        temp-&gt;prev = NULL;
+        start = temp;
+    }
+    else
+    {
+        p = start;
+
+        while(p-&gt;next != NULL)
+        {
+            p = p-&gt;next;
+        }
+
+        p-&gt;next = temp;
+        temp-&gt;prev = p;
+    }
+}
+
+void insertposition()
+{
+    struct node *temp, *p;
+    int pos, i;
+
+    printf(&quot;Enter position: &quot;);
+    scanf(&quot;%d&quot;, &amp;pos);
+
+    if(pos &lt; 1)
+    {
+        printf(&quot;Invalid position&quot;);
+        return;
+    }
+
+    if(pos == 1)
+    {
+        insertbegin();
+        return;
+    }
+
+    p = start;
+
+    for(i = 1; i &lt; pos - 1 &amp;&amp; p != NULL; i++)
+    {
+        p = p-&gt;next;
+    }
+
+    if(p == NULL)
+    {
+        printf(&quot;Invalid position&quot;);
+        return;
+    }
+
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    if(temp == NULL)
+    {
+        printf(&quot;Memory is full&quot;);
+        return;
+    }
+
+    printf(&quot;Enter value: &quot;);
+    scanf(&quot;%d&quot;, &amp;temp-&gt;data);
+
+    temp-&gt;prev = p;
+    temp-&gt;next = p-&gt;next;
+
+    if(p-&gt;next != NULL)
+    {
+        p-&gt;next-&gt;prev = temp;
+    }
+
+    p-&gt;next = temp;
+}
+
+void deletebegin()
+{
+    struct node *temp;
+
+    if(start == NULL)
+    {
+        printf(&quot;List is empty&quot;);
+        return;
+    }
+
+    temp = start;
+    start = start-&gt;next;
+
+    if(start != NULL)
+    {
+        start-&gt;prev = NULL;
+    }
+
+    free(temp);
+
+    printf(&quot;Node deleted&quot;);
+}
+
+void deleteend()
+{
+    struct node *p;
+
+    if(start == NULL)
+    {
+        printf(&quot;List is empty&quot;);
+        return;
+    }
+
+    p = start;
+
+    while(p-&gt;next != NULL)
+    {
+        p = p-&gt;next;
+    }
+
+    if(p-&gt;prev == NULL)
+    {
+        start = NULL;
+    }
+    else
+    {
+        p-&gt;prev-&gt;next = NULL;
+    }
+
+    free(p);
+
+    printf(&quot;Node deleted&quot;);
+}
+
+void deleteposition()
+{
+    struct node *p;
+    int pos, i;
+
+    printf(&quot;Enter position: &quot;);
+    scanf(&quot;%d&quot;, &amp;pos);
+
+    if(pos &lt; 1 || start == NULL)
+    {
+        printf(&quot;Invalid position or empty list&quot;);
+        return;
+    }
+
+    p = start;
+
+    for(i = 1; i &lt; pos &amp;&amp; p != NULL; i++)
+    {
+        p = p-&gt;next;
+    }
+
+    if(p == NULL)
+    {
+        printf(&quot;Invalid position&quot;);
+        return;
+    }
+
+    if(p-&gt;prev == NULL)
+    {
+        start = p-&gt;next;
+    }
+    else
+    {
+        p-&gt;prev-&gt;next = p-&gt;next;
+    }
+
+    if(p-&gt;next != NULL)
+    {
+        p-&gt;next-&gt;prev = p-&gt;prev;
+    }
+
+    free(p);
+
+    printf(&quot;Node deleted&quot;);
+}
+
+void search()
+{
+    struct node *p;
+    int value, pos = 1;
+
+    printf(&quot;Enter value to search: &quot;);
+    scanf(&quot;%d&quot;, &amp;value);
+
+    p = start;
+
+    while(p != NULL)
+    {
+        if(p-&gt;data == value)
+        {
+            printf(&quot;Value found at position %d&quot;, pos);
+            return;
+        }
+
+        p = p-&gt;next;
+        pos++;
+    }
+
+    printf(&quot;Value not found&quot;);
+}
+
+void sort()
+{
+    struct node *p, *q;
+    int temp;
+
+    if(start == NULL)
+    {
+        printf(&quot;List is empty&quot;);
+        return;
+    }
+
+    for(p = start; p-&gt;next != NULL; p = p-&gt;next)
+    {
+        for(q = p-&gt;next; q != NULL; q = q-&gt;next)
+        {
+            if(p-&gt;data &gt; q-&gt;data)
+            {
+                temp = p-&gt;data;
+                p-&gt;data = q-&gt;data;
+                q-&gt;data = temp;
+            }
+        }
+    }
+
+    printf(&quot;List sorted&quot;);
+}
+
+void display()
+{
+    struct node *p;
+
+    if(start == NULL)
+    {
+        printf(&quot;List is empty&quot;);
+        return;
+    }
+
+    p = start;
+
+    printf(&quot;List: &quot;);
+
+    while(p != NULL)
+    {
+        printf(&quot;%d &quot;, p-&gt;data);
+        p = p-&gt;next;
+    }
+}
+
+int main()
+{
+    int choice;
+
+    while(1)
+    {
+        printf(&quot;\n\n1. Insert at beginning&quot;);
+        printf(&quot;\n2. Insert at end&quot;);
+        printf(&quot;\n3. Insert at position&quot;);
+        printf(&quot;\n4. Delete at beginning&quot;);
+        printf(&quot;\n5. Delete at end&quot;);
+        printf(&quot;\n6. Delete at position&quot;);
+        printf(&quot;\n7. Search&quot;);
+        printf(&quot;\n8. Sort&quot;);
+        printf(&quot;\n9. Display&quot;);
+        printf(&quot;\n10. Exit&quot;);
+        printf(&quot;\nEnter choice: &quot;);
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        if(choice == 1)
+            insertbegin();
+        else if(choice == 2)
+            insertend();
+        else if(choice == 3)
+            insertposition();
+        else if(choice == 4)
+            deletebegin();
+        else if(choice == 5)
+            deleteend();
+        else if(choice == 6)
+            deleteposition();
+        else if(choice == 7)
+            search();
+        else if(choice == 8)
+            sort();
+        else if(choice == 9)
+            display();
+        else if(choice == 10)
+            break;
+        else
+            printf(&quot;Invalid choice&quot;);
+    }
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter choice: 1
+Enter value: 30
+
+Enter choice: 2
+Enter value: 10
+
+Enter choice: 2
+Enter value: 20
+
+Enter choice: 9
+List: 30 10 20
+
+Enter choice: 8
+List sorted
+
+Enter choice: 9
+List: 10 20 30
+
+Enter choice: 10
+</pre></h3>
+  <h2>Complexity</h2>
+  <h3><pre>Insert at beginning : O(1)
+Insert at end       : O(n)  (must travel to the last node)
+Insert at position  : O(n)
+Delete at beginning : O(1)
+Delete at end       : O(n)  (travels to the last node)
+Delete at position  : O(n)
+Search              : O(n)
+Sort                : O(n^2)  (two nested loops, swaps data)
+Display             : O(n)
+
+Space Complexity: O(n) for the nodes, O(1) extra space.
+(n = number of nodes in the list)
+
+Space: each node also stores one extra pointer (prev), still O(n) overall.
+</pre></h3>
+  <a href="../questions.html">Back to Topic</a>
+</body>
+</html>

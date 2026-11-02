@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q9.Enter an array from user and find the k-th smallest value</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[5], i, j, temp, k;
+    printf(&quot;Enter any five numbers: &quot;);
+    for(i=0; i&lt;5; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+    printf(&quot;Enter the value of k: &quot;);
+    scanf(&quot;%d&quot;, &amp;k);
+    for(i=0; i&lt;5; i++)
+    {
+        for(j=i+1; j&lt;5; j++)
+        {
+            if(arr[i] &gt; arr[j])
+            {
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+    if(k&gt;=1 &amp;&amp; k&lt;=5)
+    {
+        printf(&quot;K-th smallest value = %d&quot;, arr[k-1]);
+    }
+    else
+    {
+        printf(&quot;Invalid value of k&quot;);
+    }
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>
+Enter any five numbers: 9  8  10  7  11
+Enter the value of k: 5
+K-th smallest value = 11
+</pre></h3>
+  <a href="../arrays.html">Back to Topic</a>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Algorithms</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q8. Enter a integer array from the user and perform merge sort algorithm through recursion. also calculate the worst and best complexity with exact time.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+// Function to merge two sorted parts
+void merge(int a[], int left, int mid, int right)
+{
+    int temp[100];
+    int i = left, j = mid + 1, k = left;
+
+    // Compare and merge elements
+    while (i &lt;= mid &amp;&amp; j &lt;= right)
+    {
+        if (a[i] &lt;= a[j])
+        {
+            temp[k] = a[i];
+            i++;
+        }
+        else
+        {
+            temp[k] = a[j];
+            j++;
+        }
+        k++;
+    }
+
+    // Copy remaining elements
+    while (i &lt;= mid)
+    {
+        temp[k] = a[i];
+        i++;
+        k++;
+    }
+
+    while (j &lt;= right)
+    {
+        temp[k] = a[j];
+        j++;
+        k++;
+    }
+
+    // Copy elements back to the original array
+    for (i = left; i &lt;= right; i++)
+    {
+        a[i] = temp[i];
+    }
+}
+
+// Function to perform merge sort using recursion
+void mergeSort(int a[], int left, int right)
+{
+    int mid;
+
+    if (left &lt; right)
+    {
+        mid = (left + right) / 2;
+
+        // Sort the left part
+        mergeSort(a, left, mid);
+
+        // Sort the right part
+        mergeSort(a, mid + 1, right);
+
+        // Merge both sorted parts
+        merge(a, left, mid, right);
+    }
+}
+
+int main()
+{
+    int a[100], n, i;
+
+    printf(&quot;Enter the number of elements: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter array elements:\n&quot;);
+    for (i = 0; i &lt; n; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;a[i]);
+    }
+
+    // Call the sorting function
+    mergeSort(a, 0, n - 1);
+
+    printf(&quot;Sorted array:\n&quot;);
+    for (i = 0; i &lt; n; i++)
+    {
+        printf(&quot;%d &quot;, a[i]);
+    }
+
+    printf(&quot;\nBest Case Time Complexity = O(n log n)&quot;);
+    printf(&quot;\nWorst Case Time Complexity = O(n log n)&quot;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter the number of elements: 5
+Enter array elements:
+68 29 16 26 15
+Sorted array:
+15 16 26 29 68
+Best Case Time Complexity = O(n log n)
+Worst Case Time Complexity = O(n log n)
+</pre></h3>
+  <a href="../sorting.html">Back to Topic</a>
+</body>
+</html>

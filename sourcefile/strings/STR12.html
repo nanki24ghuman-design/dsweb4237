@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q12. Enter the string from user and print each character in new line</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[100];
+    int i;
+
+    printf(&quot;Enter a string: &quot;);
+    fgets(str, sizeof(str), stdin);
+
+    for(i = 0; str[i] != &#x27;\0&#x27; &amp;&amp; str[i] != &#x27;\n&#x27;; i++)
+        printf(&quot;%c\n&quot;, str[i]);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a string: DOG
+D
+O
+G
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions Given by Sir</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q9. Write a C program to check whether an expression is correct. Use only alphabets and the operators +, *, /, ^. Do not use isalpha().</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int check(char str[], char op[])
+{
+    int i = 0, j, allowed;
+    int needLetter = 1;
+
+    while(str[i] != &#x27;\0&#x27;)
+    {
+        if(str[i] == &#x27; &#x27; || str[i] == &#x27;\n&#x27;)
+        {
+            i++;
+            continue;
+        }
+
+        if(needLetter == 1)
+        {
+            if((str[i] &gt;= &#x27;A&#x27; &amp;&amp; str[i] &lt;= &#x27;Z&#x27;) ||
+               (str[i] &gt;= &#x27;a&#x27; &amp;&amp; str[i] &lt;= &#x27;z&#x27;))
+            {
+                needLetter = 0;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else
+        {
+            allowed = 0;
+
+            for(j = 0; op[j] != &#x27;\0&#x27;; j++)
+            {
+                if(str[i] == op[j])
+                {
+                    allowed = 1;
+                    break;
+                }
+            }
+
+            if(allowed == 0)
+            {
+                return 0;
+            }
+
+            needLetter = 1;
+        }
+
+        i++;
+    }
+
+    if(needLetter == 1)
+    {
+        return 0;
+    }
+
+    return 1;
+}
+
+int main()
+{
+    char str[100];
+    char op[] = &quot;+*/^&quot;;
+    int result;
+
+    printf(&quot;Enter expression: &quot;);
+    fgets(str, sizeof(str), stdin);
+
+    result = check(str, op);
+
+    if(result == 1)
+    {
+        printf(&quot;Expression is correct&quot;);
+    }
+    else
+    {
+        printf(&quot;Expression is incorrect&quot;);
+    }
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter expression: A+B*C
+Expression is correct
+</pre></h3>
+  <h2>Complexity</h2>
+  <h3><pre>Time Complexity: O(n)  (each character is checked once; the operator list has only 4 symbols, so that check is O(1))
+
+Space Complexity: O(n) for the input string, O(1) extra space.
+</pre></h3>
+  <a href="../questions.html">Back to Topic</a>
+</body>
+</html>

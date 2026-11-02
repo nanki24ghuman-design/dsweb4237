@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q23. Enter a sentence and a word, then count the occurrences of that word</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    char str[300], word[50];
+    int i = 0, j, k, count = 0, match;
+
+    printf(&quot;Enter a sentence: &quot;);
+    fgets(str, sizeof(str), stdin);
+
+    printf(&quot;Enter a word: &quot;);
+    scanf(&quot;%49s&quot;, word);
+
+    while(str[i] != &#x27;\0&#x27; &amp;&amp; str[i] != &#x27;\n&#x27;)
+    {
+        while(str[i] == &#x27; &#x27;)
+            i++;
+
+        j = i;
+
+        while(str[i] != &#x27; &#x27; &amp;&amp; str[i] != &#x27;\0&#x27; &amp;&amp; str[i] != &#x27;\n&#x27;)
+            i++;
+
+        if(i &gt; j)
+        {
+            match = 1;
+
+            if(i - j != strlen(word))
+                match = 0;
+            else
+            {
+                for(k = 0; word[k] != &#x27;\0&#x27;; k++)
+                {
+                    if(str[j + k] != word[k])
+                    {
+                        match = 0;
+                        break;
+                    }
+                }
+            }
+
+            if(match == 1)
+                count++;
+        }
+    }
+
+    printf(&quot;Occurrences = %d&quot;, count);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a sentence: red blue red green red
+Enter a word: red
+Occurrences = 3
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

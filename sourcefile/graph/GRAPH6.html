@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graph</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q6. Traverse the adjacent list with breadth first search</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct node
+{
+    int vertex;
+    struct node *next;
+};
+
+struct node *a[10];
+int visited[10];
+int queue[10];
+
+void BFS(int start)
+{
+    int front = 0, rear = 0;
+    int current;
+    struct node *temp;
+
+    visited[start] = 1;
+    queue[rear] = start;
+    rear++;
+
+    while (front &lt; rear)
+    {
+        current = queue[front];
+        front++;
+
+        printf(&quot;%d &quot;, current);
+
+        temp = a[current];
+
+        while (temp != NULL)
+        {
+            if (visited[temp-&gt;vertex] == 0)
+            {
+                visited[temp-&gt;vertex] = 1;
+                queue[rear] = temp-&gt;vertex;
+                rear++;
+            }
+
+            temp = temp-&gt;next;
+        }
+    }
+}
+
+int main()
+{
+    int v, e, i, x, y, start;
+    struct node *temp;
+
+    printf(&quot;Enter number of vertices: &quot;);
+    scanf(&quot;%d&quot;, &amp;v);
+
+    printf(&quot;Enter number of edges: &quot;);
+    scanf(&quot;%d&quot;, &amp;e);
+
+    for (i = 0; i &lt; v; i++)
+    {
+        a[i] = NULL;
+        visited[i] = 0;
+    }
+
+    printf(&quot;Enter edges (two vertices):\n&quot;);
+
+    for (i = 0; i &lt; e; i++)
+    {
+        scanf(&quot;%d %d&quot;, &amp;x, &amp;y);
+
+        temp = (struct node *)malloc(sizeof(struct node));
+        temp-&gt;vertex = y;
+        temp-&gt;next = a[x];
+        a[x] = temp;
+
+        temp = (struct node *)malloc(sizeof(struct node));
+        temp-&gt;vertex = x;
+        temp-&gt;next = a[y];
+        a[y] = temp;
+    }
+
+    printf(&quot;Enter starting vertex: &quot;);
+    scanf(&quot;%d&quot;, &amp;start);
+
+    printf(&quot;BFS Traversal: &quot;);
+    BFS(start);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter number of vertices: 8
+Enter number of edges: 4
+Enter edges (two vertices):
+1 3
+0 2
+3 12
+2 3
+Enter starting vertex: 1
+BFS Traversal: 1 3 2 12
+</pre></h3>
+  <a href="../graph.html">Back to Topic</a>
+</body>
+</html>

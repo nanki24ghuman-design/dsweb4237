@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q22. Enter the string from user, sort it in ascending order and print it</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[100], temp;
+    int i, j, len = 0;
+
+    printf(&quot;Enter a string: &quot;);
+    fgets(str, sizeof(str), stdin);
+
+    while(str[len] != &#x27;\0&#x27; &amp;&amp; str[len] != &#x27;\n&#x27;)
+        len++;
+
+    for(i = 0; i &lt; len - 1; i++)
+    {
+        for(j = 0; j &lt; len - i - 1; j++)
+        {
+            if(str[j] &gt; str[j + 1])
+            {
+                temp = str[j];
+                str[j] = str[j + 1];
+                str[j + 1] = temp;
+            }
+        }
+    }
+
+    str[len] = &#x27;\0&#x27;;
+
+    printf(&quot;Sorted string: %s&quot;, str);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a string: zyxw
+Sorted string: wxyz
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

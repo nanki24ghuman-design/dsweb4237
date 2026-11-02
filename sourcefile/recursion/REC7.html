@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recursion</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q7. Enter the number from the user and add all digits of the number using recursion.</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+int sumdigits(int n){
+    if(n==0){
+    return 0;
+    }
+    return (n%10) +sumdigits(n/10);
+}
+int main(){
+    int n;
+    printf(&quot;enter the number:&quot;);
+    scanf(&quot;%d&quot;,&amp;n);
+    if(n&lt;0){
+    n=-n;}
+    printf(&quot;the sum of digits : %d&quot;,sumdigits(n));
+    return 0;
+    
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>enter the number:1349
+the sum of digits : 17
+</pre></h3>
+  <a href="../recursion.html">Back to Topic</a>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q10. Enter an array from user and add all values</h2>
+  <pre><h3>
+//Enter an array from user and add all values ?
+#include&lt;stdio.h&gt;
+int main()
+{
+    int arr[5],i,sum=0;
+    printf(&quot;Enter any five numbers: &quot;);
+    for(i=0;i&lt;5;i++)
+    {
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+    for(i=0;i&lt;5;i++)
+    {
+        sum=sum+arr[i];
+    }
+    printf(&quot;Sum of all values = %d&quot;,sum);
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter any five numbers: 10
+79
+7
+8
+7
+Sum of all values = 111
+</pre></h3>
+  <a href="../arrays.html">Back to Topic</a>
+</body>
+</html>

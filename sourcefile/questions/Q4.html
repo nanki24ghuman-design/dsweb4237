@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions Given by Sir</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q4. Enter an array and display the positive difference between adjacent numbers.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a[100], n, i, diff;
+
+    printf(&quot;Enter the size of array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter the array elements: &quot;);
+
+    for(i = 0; i &lt; n; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;a[i]);
+    }
+
+    for(i = 0; i &lt; n - 1; i++)
+    {
+        if(a[i] &gt; a[i + 1])
+        {
+            diff = a[i] - a[i + 1];
+        }
+        else
+        {
+            diff = a[i + 1] - a[i];
+        }
+
+        printf(&quot;Difference between %d and %d = %d\n&quot;,
+               a[i], a[i + 1], diff);
+    }
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter the size of array: 4
+Enter the array elements: 14 8 12 6
+Difference between 14 and 8 = 6
+Difference between 8 and 12 = 4
+Difference between 12 and 6 = 6
+</pre></h3>
+  <h2>Complexity</h2>
+  <h3><pre>Time Complexity: O(n)  (one loop, each pair is checked once)
+
+Space Complexity: O(n) for the array, O(1) extra space.
+</pre></h3>
+  <a href="../questions.html">Back to Topic</a>
+</body>
+</html>

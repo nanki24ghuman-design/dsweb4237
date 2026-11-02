@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trees</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q18. Count the number of nodes in binary search tree constructed dynamically</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Node {
+    int data;
+    struct Node *left, *right;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode =
+        (struct Node*)malloc(sizeof(struct Node));
+
+    newNode-&gt;data = data;
+    newNode-&gt;left = NULL;
+    newNode-&gt;right = NULL;
+
+    return newNode;
+}
+
+struct Node* insert(struct Node* root, int data) {
+    if (root == NULL)
+        return createNode(data);
+
+    if (data &lt; root-&gt;data)
+        root-&gt;left = insert(root-&gt;left, data);
+    else if (data &gt; root-&gt;data)
+        root-&gt;right = insert(root-&gt;right, data);
+
+    return root;
+}
+
+int countNodes(struct Node* root) {
+    if (root == NULL)
+        return 0;
+
+    return 1 + countNodes(root-&gt;left)
+             + countNodes(root-&gt;right);
+}
+
+int main() {
+    struct Node* root = NULL;
+    int n, value;
+
+    printf(&quot;Enter number of nodes: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt; 0) {
+        printf(&quot;Invalid number of nodes.\n&quot;);
+        return 0;
+    }
+
+    printf(&quot;Enter node values: &quot;);
+
+    for (int i = 0; i &lt; n; i++) {
+        scanf(&quot;%d&quot;, &amp;value);
+        root = insert(root, value);
+    }
+
+    printf(&quot;Total number of nodes = %d\n&quot;,
+           countNodes(root));
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter number of nodes: 5
+Enter node values: 50 30 70 20 40
+Total number of nodes = 5
+</pre></h3>
+  <a href="../trees.html">Back to Topic</a>
+</body>
+</html>

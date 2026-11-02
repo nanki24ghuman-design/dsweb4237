@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stacks</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q9. Enter the infix expression from user and convert into prefix expression.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+char stack[100];
+int top = -1;
+
+void push(char ch)
+{
+    stack[++top] = ch;
+}
+
+char pop()
+{
+    return stack[top--];
+}
+
+int main()
+{
+    char infix[100], prefix[100], temp;
+    int i, j = 0, len;
+
+    printf(&quot;Enter infix expression: &quot;);
+    scanf(&quot;%s&quot;, infix);
+
+    len = strlen(infix);
+
+    for(i = len - 1; i &gt;= 0; i--)
+    {
+        temp = infix[i];
+
+        if(isalnum(temp))
+        {
+            prefix[j++] = temp;
+        }
+        else if(temp == &#x27;)&#x27;)
+        {
+            push(temp);
+        }
+        else if(temp == &#x27;(&#x27;)
+        {
+            while(top != -1 &amp;&amp; stack[top] != &#x27;)&#x27;)
+                prefix[j++] = pop();
+
+            if(top != -1)
+                pop();
+        }
+        else
+        {
+            while(top != -1 &amp;&amp; stack[top] != &#x27;)&#x27;)
+                prefix[j++] = pop();
+
+            push(temp);
+        }
+    }
+
+    while(top != -1)
+        prefix[j++] = pop();
+
+    prefix[j] = &#x27;\0&#x27;;
+
+    for(i = 0; i &lt; j / 2; i++)
+    {
+        temp = prefix[i];
+        prefix[i] = prefix[j - i - 1];
+        prefix[j - i - 1] = temp;
+    }
+
+    printf(&quot;Prefix expression: %s&quot;, prefix);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>;-
+Enter infix expression: A+B
+Prefix expression: +AB
+</pre></h3>
+  <a href="../stacks.html">Back to Topic</a>
+</body>
+</html>

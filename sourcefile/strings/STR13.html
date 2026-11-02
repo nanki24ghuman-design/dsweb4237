@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q13. Enter the string from user and copy its reverse into another string</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str1[100], str2[100];
+    int i = 0, j;
+
+    printf(&quot;Enter a string: &quot;);
+    fgets(str1, sizeof(str1), stdin);
+
+    while(str1[i] != &#x27;\0&#x27; &amp;&amp; str1[i] != &#x27;\n&#x27;)
+        i++;
+
+    for(j = 0; j &lt; i; j++)
+        str2[j] = str1[i - j - 1];
+
+    str2[j] = &#x27;\0&#x27;;
+
+    printf(&quot;Reversed string: %s&quot;, str2);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a string: Pointer
+Reversed string: retnioP
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

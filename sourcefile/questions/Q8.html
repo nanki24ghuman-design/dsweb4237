@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions Given by Sir</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q8. Write a C program for bracket matching using push and pop. Use only round brackets and local variables.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+void push(char stack[], int *top, char ch)
+{
+    (*top)++;
+    stack[*top] = ch;
+}
+
+void pop(int *top)
+{
+    (*top)--;
+}
+
+int main()
+{
+    char str[100], stack[100];
+    int top = -1, i = 0, valid = 1;
+
+    printf(&quot;Enter brackets: &quot;);
+    scanf(&quot;%99s&quot;, str);
+
+    while(str[i] != &#x27;\0&#x27;)
+    {
+        if(str[i] == &#x27;(&#x27;)
+        {
+            push(stack, &amp;top, str[i]);
+        }
+        else if(str[i] == &#x27;)&#x27;)
+        {
+            if(top == -1)
+            {
+                valid = 0;
+                break;
+            }
+            else
+            {
+                pop(&amp;top);
+            }
+        }
+        else
+        {
+            valid = 0;
+            break;
+        }
+
+        i++;
+    }
+
+    if(top != -1)
+    {
+        valid = 0;
+    }
+
+    if(valid == 1)
+    {
+        printf(&quot;Brackets are balanced&quot;);
+    }
+    else
+    {
+        printf(&quot;Brackets are not balanced&quot;);
+    }
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter brackets: (())
+Brackets are balanced
+</pre></h3>
+  <h2>Complexity</h2>
+  <h3><pre>Time Complexity: O(n)  (the string is read once, push and pop take O(1))
+
+Space Complexity: O(n)  (stack may hold all '(' in the worst case).
+</pre></h3>
+  <a href="../questions.html">Back to Topic</a>
+</body>
+</html>

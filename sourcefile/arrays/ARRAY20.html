@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrays</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q20. Trapping Rain Water Problem: Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+int main()
+{
+    int arr[5],i,j,left,right,water=0;
+    printf(&quot;Enter five heights: &quot;);
+    for(i=0;i&lt;5;i++)
+    {
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+    for(i=1;i&lt;4;i++)
+    {
+        left=arr[0];
+        right=arr[4];
+        for(j=0;j&lt;i;j++)
+        {
+            if(arr[j]&gt;left)
+            {
+                left=arr[j];
+            }
+        }
+        for(j=i+1;j&lt;5;j++)
+        {
+            if(arr[j]&gt;right)
+            {
+                right=arr[j];
+            }
+        }
+        if(left&lt;right)
+        {
+            water=water+left-arr[i];
+        }
+        else
+        {
+            water=water+right-arr[i];
+        }
+    }
+    printf(&quot;Trapped water = %d&quot;,water);
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter five heights: 5 6 7 0 8
+Trapped water = 5
+</pre></h3>
+  <a href="../arrays.html">Back to Topic</a>
+</body>
+</html>

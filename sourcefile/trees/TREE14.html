@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trees</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q14. Print preorder traversal to postorder traversal of binary search tree</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+void printPostorder(int pre[], int n) {
+    if (n &lt;= 0)
+        return;
+
+    int i = 0;
+
+    // Find elements belonging to left subtree
+    while (i &lt; n &amp;&amp; pre[i] &lt; pre[0])
+        i++;
+
+    // Print left subtree
+    printPostorder(pre + 1, i);
+
+    // Print right subtree
+    printPostorder(pre + i + 1, n - i - 1);
+
+    // Print root
+    printf(&quot;%d &quot;, pre[0]);
+}
+
+int main() {
+    int n, pre[100];
+
+    printf(&quot;Enter number of nodes: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt; 1 || n &gt; 100) {
+        printf(&quot;Invalid number of nodes.\n&quot;);
+        return 0;
+    }
+
+    printf(&quot;Enter preorder traversal: &quot;);
+    for (int i = 0; i &lt; n; i++)
+        scanf(&quot;%d&quot;, &amp;pre[i]);
+
+    printf(&quot;Postorder traversal: &quot;);
+    printPostorder(pre, n);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter number of nodes: 6
+Enter preorder traversal: 14 24 29 39 44 64
+Postorder traversal: 64 44 39 29 24 14
+</pre></h3>
+  <a href="../trees.html">Back to Topic</a>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graph</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q3. Traverse the adjacent matrix with depth first search</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int a[10][10], visited[10], v;
+
+// Function to perform DFS
+void DFS(int start)
+{
+    int i;
+
+    printf(&quot;%d &quot;, start);
+    visited[start] = 1;
+
+    for (i = 0; i &lt; v; i++)
+    {
+        if (a[start][i] == 1 &amp;&amp; visited[i] == 0)
+        {
+            DFS(i);
+        }
+    }
+}
+
+int main()
+{
+    int i, j, start;
+
+    printf(&quot;Enter number of vertices: &quot;);
+    scanf(&quot;%d&quot;, &amp;v);
+
+    printf(&quot;Enter adjacency matrix:\n&quot;);
+
+    for (i = 0; i &lt; v; i++)
+    {
+        for (j = 0; j &lt; v; j++)
+        {
+            scanf(&quot;%d&quot;, &amp;a[i][j]);
+        }
+    }
+
+    for (i = 0; i &lt; v; i++)
+    {
+        visited[i] = 0;
+    }
+
+    printf(&quot;Enter starting vertex: &quot;);
+    scanf(&quot;%d&quot;, &amp;start);
+
+    printf(&quot;DFS Traversal: &quot;);
+    DFS(start);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter number of vertices: 4
+Enter adjacency matrix:
+4 5 1 4
+5 4 4 5
+5 4 4 1
+4 1 5 4
+Enter starting vertex: 0
+DFS Traversal: 0 2 3 1
+</pre></h3>
+  <a href="../graph.html">Back to Topic</a>
+</body>
+</html>

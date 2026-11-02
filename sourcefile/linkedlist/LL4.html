@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linked List</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q4. Implement the operations of doubly circular linked list storing integer values (insert at begin,insert at pos,insert at end,delete at begin,delete at end, delete at pos, isempty, isfull, display, search)</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct node
+{
+    int data;
+    struct node *prev;
+    struct node *next;
+};
+
+struct node *start = 0;
+
+int isempty()
+{
+    return start == 0;
+}
+
+int isfull()
+{
+    struct node *temp;
+
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    if (temp == 0)
+        return 1;
+
+    free(temp);
+    return 0;
+}
+
+void insertbeg()
+{
+    struct node *temp, *last;
+
+    if (isfull())
+    {
+        printf(&quot;List is full\n&quot;);
+        return;
+    }
+
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    printf(&quot;Enter value: &quot;);
+    scanf(&quot;%d&quot;, &amp;temp-&gt;data);
+
+    if (start == 0)
+    {
+        start = temp;
+        temp-&gt;next = temp;
+        temp-&gt;prev = temp;
+    }
+    else
+    {
+        last = start-&gt;prev;
+
+        temp-&gt;next = start;
+        temp-&gt;prev = last;
+
+        last-&gt;next = temp;
+        start-&gt;prev = temp;
+
+        start = temp;
+    }
+
+    printf(&quot;Node inserted\n&quot;);
+}
+
+void insertend()
+{
+    struct node *temp, *last;
+
+    if (isfull())
+    {
+        printf(&quot;List is full\n&quot;);
+        return;
+    }
+
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    printf(&quot;Enter value: &quot;);
+    scanf(&quot;%d&quot;, &amp;temp-&gt;data);
+
+    if (start == 0)
+    {
+        start = temp;
+        temp-&gt;next = temp;
+        temp-&gt;prev = temp;
+    }
+    else
+    {
+        last = start-&gt;prev;
+
+        temp-&gt;next = start;
+        temp-&gt;prev = last;
+
+        last-&gt;next = temp;
+        start-&gt;prev = temp;
+    }
+
+    printf(&quot;Node inserted\n&quot;);
+}
+
+void insertpos()
+{
+    struct node *temp, *p;
+    int pos, i;
+
+    printf(&quot;Enter position: &quot;);
+    scanf(&quot;%d&quot;, &amp;pos);
+
+    if (pos &lt; 1)
+    {
+        printf(&quot;Invalid position\n&quot;);
+        return;
+    }
+
+    if (pos == 1)
+    {
+        insertbeg();
+        return;
+    }
+
+    if (start == 0)
+    {
+        printf(&quot;Invalid position\n&quot;);
+        return;
+    }
+
+    p = start;
+
+    for (i = 1; i &lt; pos - 1 &amp;&amp; p-&gt;next != start; i++)
+        p = p-&gt;next;
+
+    if (i != pos - 1)
+    {
+        printf(&quot;Invalid position\n&quot;);
+        return;
+    }
+
+    if (isfull())
+    {
+        printf(&quot;List is full\n&quot;);
+        return;
+    }
+
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    printf(&quot;Enter value: &quot;);
+    scanf(&quot;%d&quot;, &amp;temp-&gt;data);
+
+    temp-&gt;next = p-&gt;next;
+    temp-&gt;prev = p;
+
+    p-&gt;next-&gt;prev = temp;
+    p-&gt;next = temp;
+
+    printf(&quot;Node inserted\n&quot;);
+}
+
+void deletebeg()
+{
+    struct node *temp, *last;
+
+    if (isempty())
+    {
+        printf(&quot;List is empty\n&quot;);
+        return;
+    }
+
+    temp = start;
+
+    if (start-&gt;next == start)
+    {
+        start = 0;
+    }
+    else
+    {
+        last = start-&gt;prev;
+
+        start = start-&gt;next;
+        start-&gt;prev = last;
+        last-&gt;next = start;
+    }
+
+    free(temp);
+    printf(&quot;Node deleted\n&quot;);
+}
+
+void deleteend()
+{
+    struct node *last, *secondlast;
+
+    if (isempty())
+    {
+        printf(&quot;List is empty\n&quot;);
+        return;
+    }
+
+    last = start-&gt;prev;
+
+    if (last == start)
+    {
+        start = 0;
+    }
+    else
+    {
+        secondlast = last-&gt;prev;
+
+        secondlast-&gt;next = start;
+        start-&gt;prev = secondlast;
+    }
+
+    free(last);
+    printf(&quot;Node deleted\n&quot;);
+}
+
+void deletepos()
+{
+    struct node *p;
+    int pos, i;
+
+    printf(&quot;Enter position: &quot;);
+    scanf(&quot;%d&quot;, &amp;pos);
+
+    if (isempty() || pos &lt; 1)
+    {
+        printf(&quot;Invalid position or empty list\n&quot;);
+        return;
+    }
+
+    if (pos == 1)
+    {
+        deletebeg();
+        return;
+    }
+
+    p = start;
+
+    for (i = 1; i &lt; pos &amp;&amp; p-&gt;next != start; i++)
+        p = p-&gt;next;
+
+    if (i != pos)
+    {
+        printf(&quot;Invalid position\n&quot;);
+        return;
+    }
+
+    p-&gt;prev-&gt;next = p-&gt;next;
+    p-&gt;next-&gt;prev = p-&gt;prev;
+
+    free(p);
+    printf(&quot;Node deleted\n&quot;);
+}
+
+void display()
+{
+    struct node *p;
+
+    if (isempty())
+    {
+        printf(&quot;List is empty\n&quot;);
+        return;
+    }
+
+    p = start;
+
+    printf(&quot;Doubly Circular Linked List: &quot;);
+
+    do
+    {
+        printf(&quot;%d &lt;-&gt; &quot;, p-&gt;data);
+        p = p-&gt;next;
+    }
+    while (p != start);
+
+    printf(&quot;(back to start)\n&quot;);
+}
+
+void search()
+{
+    struct node *p;
+    int key, pos = 1;
+
+    if (isempty())
+    {
+        printf(&quot;List is empty\n&quot;);
+        return;
+    }
+
+    printf(&quot;Enter value to search: &quot;);
+    scanf(&quot;%d&quot;, &amp;key);
+
+    p = start;
+
+    do
+    {
+        if (p-&gt;data == key)
+        {
+            printf(&quot;Value found at position %d\n&quot;, pos);
+            return;
+        }
+
+        p = p-&gt;next;
+        pos++;
+    }
+    while (p != start);
+
+    printf(&quot;Value not found\n&quot;);
+}
+
+int main()
+{
+    int ch;
+
+    while (1)
+    {
+        printf(&quot;\n--- DOUBLY CIRCULAR LINKED LIST ---\n&quot;);
+        printf(&quot;1. Insert at Beginning\n&quot;);
+        printf(&quot;2. Insert at Position\n&quot;);
+        printf(&quot;3. Insert at End\n&quot;);
+        printf(&quot;4. Delete at Beginning\n&quot;);
+        printf(&quot;5. Delete at End\n&quot;);
+        printf(&quot;6. Delete at Position\n&quot;);
+        printf(&quot;7. IsEmpty\n&quot;);
+        printf(&quot;8. IsFull\n&quot;);
+        printf(&quot;9. Display\n&quot;);
+        printf(&quot;10. Search\n&quot;);
+        printf(&quot;11. Exit\n&quot;);
+
+        printf(&quot;Enter choice: &quot;);
+        scanf(&quot;%d&quot;, &amp;ch);
+
+        switch (ch)
+        {
+            case 1: insertbeg(); break;
+            case 2: insertpos(); break;
+            case 3: insertend(); break;
+            case 4: deletebeg(); break;
+            case 5: deleteend(); break;
+            case 6: deletepos(); break;
+
+            case 7:
+                if (isempty())
+                    printf(&quot;List is empty\n&quot;);
+                else
+                    printf(&quot;List is not empty\n&quot;);
+                break;
+
+            case 8:
+                if (isfull())
+                    printf(&quot;List is full\n&quot;);
+                else
+                    printf(&quot;Memory is available\n&quot;);
+                break;
+
+            case 9: display(); break;
+            case 10: search(); break;
+            case 11: return 0;
+
+            default: printf(&quot;Invalid choice\n&quot;);
+        }
+    }
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>--- DOUBLY CIRCULAR LINKED LIST ---
+1. Insert at Beginning
+2. Insert at Position
+3. Insert at End
+4. Delete at Beginning
+5. Delete at End
+6. Delete at Position
+7. IsEmpty
+8. IsFull
+9. Display
+10. Search
+11. Exit
+
+Enter choice: 1
+Enter value: 10
+Node inserted
+
+Enter choice: 3
+Enter value: 20
+Node inserted
+
+Enter choice: 3
+Enter value: 30
+Node inserted
+
+Enter choice: 9
+Doubly Circular Linked List: 10 &lt;-&gt; 20 &lt;-&gt; 30 &lt;-&gt; (back to start)
+
+Enter choice: 2
+Enter position: 2
+Enter value: 15
+Node inserted
+
+Enter choice: 9
+Doubly Circular Linked List: 10 &lt;-&gt; 15 &lt;-&gt; 20 &lt;-&gt; 30 &lt;-&gt; (back to start)
+
+Enter choice: 10
+Enter value to search: 20
+Value found at position 3
+
+Enter choice: 6
+Enter position: 2
+Node deleted
+
+Enter choice: 9
+Doubly Circular Linked List: 10 &lt;-&gt; 20 &lt;-&gt; 30 &lt;-&gt; (back to start)
+
+Enter choice: 11
+</pre></h3>
+  <a href="../linkedlist.html">Back to Topic</a>
+</body>
+</html>

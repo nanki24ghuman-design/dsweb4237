@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trees</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q19. Create complete binary tree from the given input by the user (dynamically</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Node {
+    int data;
+    struct Node *left, *right;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode =
+        (struct Node*)malloc(sizeof(struct Node));
+
+    if (newNode == NULL) {
+        printf(&quot;Memory allocation failed.\n&quot;);
+        exit(1);
+    }
+
+    newNode-&gt;data = data;
+    newNode-&gt;left = NULL;
+    newNode-&gt;right = NULL;
+
+    return newNode;
+}
+
+struct Node* createCompleteTree(int arr[], int i, int n) {
+    if (i &gt;= n)
+        return NULL;
+
+    struct Node* root = createNode(arr[i]);
+
+    root-&gt;left = createCompleteTree(arr, 2 * i + 1, n);
+    root-&gt;right = createCompleteTree(arr, 2 * i + 2, n);
+
+    return root;
+}
+
+void inorder(struct Node* root) {
+    if (root == NULL)
+        return;
+
+    inorder(root-&gt;left);
+    printf(&quot;%d &quot;, root-&gt;data);
+    inorder(root-&gt;right);
+}
+
+void levelOrder(struct Node* root) {
+    if (root == NULL)
+        return;
+
+    struct Node* queue[100];
+    int front = 0, rear = 0;
+
+    queue[rear++] = root;
+
+    while (front &lt; rear) {
+        struct Node* current = queue[front++];
+        printf(&quot;%d &quot;, current-&gt;data);
+
+        if (current-&gt;left != NULL)
+            queue[rear++] = current-&gt;left;
+
+        if (current-&gt;right != NULL)
+            queue[rear++] = current-&gt;right;
+    }
+}
+
+int main() {
+    int arr[100], n;
+
+    printf(&quot;Enter number of nodes (1-100): &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt; 1 || n &gt; 100) {
+        printf(&quot;Invalid number of nodes.\n&quot;);
+        return 0;
+    }
+
+    printf(&quot;Enter node values: &quot;);
+    for (int i = 0; i &lt; n; i++)
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+
+    struct Node* root = createCompleteTree(arr, 0, n);
+
+    printf(&quot;Inorder traversal: &quot;);
+    inorder(root);
+
+    printf(&quot;\nLevel order traversal: &quot;);
+    levelOrder(root);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter number of nodes (1-100): 6
+Enter node values: 10 20 30 40 50 60
+
+Inorder traversal: 40 20 50 10 60 30
+Level order traversal: 10 20 30 40 50 60
+</pre></h3>
+  <a href="../trees.html">Back to Topic</a>
+</body>
+</html>

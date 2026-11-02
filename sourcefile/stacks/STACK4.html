@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stacks</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q4. Create a stack implementing the operations on the characters nodes (dynamically) (push, pop, peek, isempty, isfull)</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct node
+{
+    char data;
+    struct node *next;
+};
+
+struct node *top = NULL;
+
+void push(char value)
+{
+    struct node *newnode;
+
+    newnode = (struct node *)malloc(sizeof(struct node));
+
+    if (newnode == NULL)
+        printf(&quot;Stack is Full\n&quot;);
+    else
+    {
+        newnode-&gt;data = value;
+        newnode-&gt;next = top;
+        top = newnode;
+
+        printf(&quot;%c pushed into stack\n&quot;, value);
+    }
+}
+
+void pop()
+{
+    struct node *temp;
+
+    if (top == NULL)
+        printf(&quot;Stack is Empty\n&quot;);
+    else
+    {
+        temp = top;
+        printf(&quot;%c popped from stack\n&quot;, top-&gt;data);
+        top = top-&gt;next;
+        free(temp);
+    }
+}
+
+void peek()
+{
+    if (top == NULL)
+        printf(&quot;Stack is Empty\n&quot;);
+    else
+        printf(&quot;Top element is %c\n&quot;, top-&gt;data);
+}
+
+void isEmpty()
+{
+    if (top == NULL)
+        printf(&quot;Stack is Empty\n&quot;);
+    else
+        printf(&quot;Stack is Not Empty\n&quot;);
+}
+
+void isFull()
+{
+    struct node *temp;
+
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    if (temp == NULL)
+        printf(&quot;Stack is Full\n&quot;);
+    else
+    {
+        printf(&quot;Stack is Not Full\n&quot;);
+        free(temp);
+    }
+}
+
+int main()
+{
+    int n, i;
+    char value;
+
+    printf(&quot;Enter number of elements: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter characters:\n&quot;);
+
+    for (i = 0; i &lt; n; i++)
+    {
+        scanf(&quot; %c&quot;, &amp;value);
+        push(value);
+    }
+
+    peek();
+    isEmpty();
+    isFull();
+
+    pop();
+    peek();
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>-
+Enter number of elements: 3
+Enter characters:
+A
+B
+C
+A pushed into stack
+B pushed into stack
+C pushed into stack
+Top element is C
+Stack is Not Empty
+Stack is Not Full
+C popped from stack
+Top element is B
+</pre></h3>
+  <a href="../stacks.html">Back to Topic</a>
+</body>
+</html>

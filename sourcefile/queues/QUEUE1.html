@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Queues</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q1. Implement the operations of simple queue in an integer array (insert, delete, peek, isempty, isfull)</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+int q[5], front = -1, rear = -1;
+
+void insert()
+{
+    int x;
+    if (rear == 5 - 1)
+        printf(&quot;Queue Full\n&quot;);
+    else
+    {
+        printf(&quot;Enter value: &quot;);
+        scanf(&quot;%d&quot;, &amp;x);
+        if (front == -1)
+            front = 0;
+        rear++;
+        q[rear] = x;
+    }
+}
+
+void delete()
+{
+    if (front == -1)
+        printf(&quot;Queue Empty\n&quot;);
+    else
+    {
+        printf(&quot;Deleted = %d\n&quot;, q[front]);
+        if (front == rear)
+            front = rear = -1;
+        else
+            front++;
+    }
+}
+
+void peek()
+{
+    if (front == -1)
+        printf(&quot;Queue Empty\n&quot;);
+    else
+        printf(&quot;Front = %d\n&quot;, q[front]);
+}
+
+void isempty()
+{
+    if (front == -1)
+        printf(&quot;Queue is Empty\n&quot;);
+    else
+        printf(&quot;Queue is Not Empty\n&quot;);
+}
+
+void isfull()
+{
+    if (rear == 5 - 1)
+        printf(&quot;Queue is Full\n&quot;);
+    else
+        printf(&quot;Queue is Not Full\n&quot;);
+}
+
+int main()
+{
+    int ch;
+    while (1)
+    {
+        printf(&quot;\n1.Insert 2.Delete 3.Peek&quot;);
+        printf(&quot;\n4.IsEmpty 5.IsFull 6.Exit&quot;);
+        printf(&quot;\nEnter choice: &quot;);
+        scanf(&quot;%d&quot;, &amp;ch);
+
+        switch (ch)
+        {
+            case 1: insert(); break;
+            case 2: delete(); break;
+            case 3: peek(); break;
+            case 4: isempty(); break;
+            case 5: isfull(); break;
+            case 6: return 0;
+            default: printf(&quot;Invalid choice&quot;);
+        }
+    }
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>1.Insert  2.Delete  3.Peek
+4.IsEmpty  5.IsFull  6.Exit
+Enter choice: 1
+Enter value: 10
+
+1.Insert  2.Delete  3.Peek
+4.IsEmpty  5.IsFull  6.Exit
+Enter choice: 1
+Enter value: 20
+
+1.Insert  2.Delete  3.Peek
+4.IsEmpty  5.IsFull  6.Exit
+Enter choice: 3
+Front = 10
+
+1.Insert  2.Delete  3.Peek
+4.IsEmpty  5.IsFull  6.Exit
+Enter choice: 4
+Queue is Not Empty
+
+1.Insert  2.Delete  3.Peek
+4.IsEmpty  5.IsFull  6.Exit
+Enter choice: 2
+Deleted = 10
+
+1.Insert  2.Delete  3.Peek
+4.IsEmpty  5.IsFull  6.Exit
+Enter choice: 5
+Queue is Not Full
+
+1.Insert  2.Delete  3.Peek
+4.IsEmpty  5.IsFull  6.Exit
+Enter choice: 6
+</pre></h3>
+  <a href="../queues.html">Back to Topic</a>
+</body>
+</html>

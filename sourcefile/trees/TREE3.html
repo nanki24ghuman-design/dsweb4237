@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trees</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q3. Construct binary tree from preorder and inorder traversal</h2>
+  <pre><h3>
+#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+struct node{
+    int data;
+    struct node *left,*right;
+};
+int preindex=0;
+struct node*create(int pre[],int in[],int start, int end){
+    if(start&gt;end)
+    return NULL;
+    struct node* newnode;
+    int i;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode-&gt;data=pre[preindex++];
+    newnode-&gt;left=NULL;
+    newnode-&gt;right=NULL;
+    if(start==end)
+    return newnode;
+    for(i=start;i&lt;=end;i++){
+        if(in[i]==newnode-&gt;data)
+        break;
+    }
+    newnode-&gt;left=create(pre,in,start,i-1);
+    newnode-&gt;right=create(pre,in,i+1,end);
+    return newnode;
+}
+void inorder(struct node*root){
+    if(root==NULL)
+    return ;
+    inorder(root-&gt;left);
+    printf(&quot;%d&quot;,root-&gt;data);
+    inorder(root-&gt;right);
+}
+int main(){
+    int pre[]={1,2,4,5,3,6,7};
+    int in[]={4,2,5,1,6,3,7};
+    struct node*root;
+    root=create(pre,in,0,6);
+    printf(&quot;inorder traversal:&quot;);
+    inorder(root);
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>inorder traversal:4251637
+</pre></h3>
+  <a href="../trees.html">Back to Topic</a>
+</body>
+</html>

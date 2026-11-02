@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strings</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q6. Enter the string from user and find the length of the string</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    char str[100];
+    int i = 0;
+
+    printf(&quot;Enter a string: &quot;);
+    fgets(str, sizeof(str), stdin);
+
+    while(str[i] != &#x27;\0&#x27; &amp;&amp; str[i] != &#x27;\n&#x27;)
+        i++;
+
+    printf(&quot;Length = %d&quot;, i);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter a string: Hello
+Length = 5
+</pre></h3>
+  <a href="../strings.html">Back to Topic</a>
+</body>
+</html>

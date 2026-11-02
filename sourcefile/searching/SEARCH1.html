@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Searching Algorithms</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q1. Enter a integer array from the user, enter an integer value and perform linear search algorithm through iteration.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a[100], n, i, value, found = 0;
+
+    printf(&quot;Enter the size of array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter array elements:\n&quot;);
+    for(i = 0; i &lt; n; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;a[i]);
+    }
+
+    printf(&quot;Enter value to search: &quot;);
+    scanf(&quot;%d&quot;, &amp;value);
+
+    for(i = 0; i &lt; n; i++)
+    {
+        if(a[i] == value)
+        {
+            printf(&quot;Value found at position %d&quot;, i + 1);
+            found = 1;
+            break;
+        }
+    }
+
+    if(found == 0)
+    {
+        printf(&quot;Value not found&quot;);
+    }
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>-
+Enter the size of array: 5
+Enter array elements:
+10 20 30 40 50
+Enter value to search: 30
+Value found at position 3
+</pre></h3>
+  <a href="../searching.html">Back to Topic</a>
+</body>
+</html>

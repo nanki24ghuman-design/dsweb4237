@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stacks</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q5. Enter the string from the user and reverse the string using stacks.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+#define MAX 100
+
+char stack[MAX];
+int top = -1;
+
+int main()
+{
+    char str[MAX];
+    int i;
+
+    printf(&quot;Enter a string: &quot;);
+    scanf(&quot; %[^\n]&quot;, str);
+
+    for (i = 0; i &lt; strlen(str); i++)
+    {
+        top++;
+        stack[top] = str[i];
+    }
+
+    printf(&quot;Reversed string: &quot;);
+
+    while (top != -1)
+    {
+        printf(&quot;%c&quot;, stack[top]);
+        top--;
+    }
+
+    printf(&quot;\n&quot;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>-
+Enter a string: HELLO WORLD
+Reversed string: DLROW OLLEH
+</pre></h3>
+  <a href="../stacks.html">Back to Topic</a>
+</body>
+</html>

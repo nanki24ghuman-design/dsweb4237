@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stacks</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q8. Sort the stack in ascending order using integer array.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+
+#define MAX 100
+
+int stack[MAX];
+int top = -1;
+
+int main()
+{
+    int n, i, j, temp;
+
+    printf(&quot;Enter number of elements: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter elements:\n&quot;);
+
+    for (i = 0; i &lt; n; i++)
+    {
+        scanf(&quot;%d&quot;, &amp;stack[i]);
+        top++;
+    }
+
+    for (i = 0; i &lt; n - 1; i++)
+    {
+        for (j = i + 1; j &lt; n; j++)
+        {
+            if (stack[i] &gt; stack[j])
+            {
+                temp = stack[i];
+                stack[i] = stack[j];
+                stack[j] = temp;
+            }
+        }
+    }
+
+    printf(&quot;Stack in ascending order:\n&quot;);
+
+    for (i = 0; i &lt; n; i++)
+        printf(&quot;%d &quot;, stack[i]);
+
+    printf(&quot;\n&quot;);
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>-
+Enter number of elements: 5
+Enter elements:
+40
+10
+50
+20
+30
+Stack in ascending order:
+10 20 30 40 50
+</pre></h3>
+  <a href="../stacks.html">Back to Topic</a>
+</body>
+</html>

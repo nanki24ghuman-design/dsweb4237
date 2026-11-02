@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Questions Given by Sir</title>
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+  <h2>Q13. Implement a dynamic stack using malloc and linked list with push, pop, peek and exit operations.</h2>
+  <pre><h3>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *top = NULL;
+
+void push()
+{
+    struct node *temp;
+    int value;
+
+    temp = (struct node *)malloc(sizeof(struct node));
+
+    if(temp == NULL)
+    {
+        printf(&quot;Memory is full&quot;);
+        return;
+    }
+
+    printf(&quot;Enter value: &quot;);
+    scanf(&quot;%d&quot;, &amp;value);
+
+    temp-&gt;data = value;
+    temp-&gt;next = top;
+    top = temp;
+
+    printf(&quot;Value pushed&quot;);
+}
+
+void pop()
+{
+    struct node *temp;
+
+    if(top == NULL)
+    {
+        printf(&quot;Stack is empty&quot;);
+    }
+    else
+    {
+        temp = top;
+
+        printf(&quot;Deleted value: %d&quot;, top-&gt;data);
+
+        top = top-&gt;next;
+
+        free(temp);
+    }
+}
+
+void peek()
+{
+    if(top == NULL)
+    {
+        printf(&quot;Stack is empty&quot;);
+    }
+    else
+    {
+        printf(&quot;Top value: %d&quot;, top-&gt;data);
+    }
+}
+
+int main()
+{
+    int choice;
+
+    while(1)
+    {
+        printf(&quot;\n1. Push\n2. Pop\n3. Peek\n4. Exit\n&quot;);
+        printf(&quot;Enter choice: &quot;);
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        if(choice == 1)
+        {
+            push();
+        }
+        else if(choice == 2)
+        {
+            pop();
+        }
+        else if(choice == 3)
+        {
+            peek();
+        }
+        else if(choice == 4)
+        {
+            break;
+        }
+        else
+        {
+            printf(&quot;Invalid choice&quot;);
+        }
+    }
+
+    return 0;
+}
+  </h3></pre>
+  <h2>Output</h2>
+  <h3><pre>Enter choice: 1
+Enter value: 10
+Value pushed
+
+Enter choice: 1
+Enter value: 20
+Value pushed
+
+Enter choice: 3
+Top value: 20
+
+Enter choice: 2
+Deleted value: 20
+
+Enter choice: 3
+Top value: 10
+
+Enter choice: 4
+</pre></h3>
+  <h2>Complexity</h2>
+  <h3><pre>Time Complexity:
+Push : O(1)
+Pop  : O(1)
+Peek : O(1)
+
+Space Complexity: O(n)  (one node for each element).
+</pre></h3>
+  <a href="../questions.html">Back to Topic</a>
+</body>
+</html>
